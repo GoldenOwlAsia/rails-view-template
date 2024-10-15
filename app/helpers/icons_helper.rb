@@ -1,37 +1,25 @@
 # frozen_string_literal: true
 
 module IconsHelper
-  def icon(name, text = nil, options = {})
-    if text.is_a?(Hash)
-      options = text
-      text = nil
-    end
-    options.reverse_merge!({ class: 'w-6 h-6' })
-    options['id'] = nil
-    options['class'] = options[:class]
-    options['width'] = '24px'
-    options['height'] = '24px'
+  def lucide_icon(name, options = {})
+    tag.i('', data: { lucide: name }, class: (options[:class]).to_s)
+  rescue StandardError
+    tag.span(name.to_s.dasherize) + content_tag(:span, text, class: 'ms-1')
+  end
 
-    type = options.delete(:type) || 'outline'
-
-    tooltip = options.delete(:tooltip)
-    icon = InlineSvg::TransformPipeline.generate_html_from(read_svg_icon(name.to_s, type), options)
-    icon = icon.html_safe + content_tag(:span, text, class: 'ms-1') if text.blank? # rubocop:disable Rails/OutputSafety
-
-    return icon unless tooltip
-
-    content_tag(:span, icon, class: 'tooltip', data: { tip: tooltip })
+  def svg_image_icon(name, options = {})
+    tag.svg(read_svg_icon(name, type), data: { lucide: name }, class: (options[:class]).to_s)
   rescue StandardError
     tag.span(name.to_s.dasherize) + content_tag(:span, text, class: 'ms-1')
   end
 
   private
 
-  def icons_path(type = 'outline')
-    Rails.public_path.join("assets/icons/heroicons/#{type}")
+  def icons_path
+    Rails.public_path.join('frontend/images/icons')
   end
 
-  def read_svg_icon(filename, type = 'outline')
-    File.read("#{icons_path(type)}/#{filename.dasherize}.svg")
+  def read_svg_icon(filename)
+    File.read("#{icons_path}/#{filename.dasherize}.svg")
   end
 end

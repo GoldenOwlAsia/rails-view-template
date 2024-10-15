@@ -15,5 +15,6 @@ html[lang="en"]
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
     = vite_client_tag
     = vite_javascript_tag "application", "data-turbo-track": "reload"
-  body
+  body data-controller="icons"
+    = render "layouts/header"
     = yield
