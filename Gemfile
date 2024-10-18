@@ -6,12 +6,14 @@ gem 'bootsnap', require: false
 gem 'good_migrations'
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 7.2.1'
+gem 'rails', '~> 7.2.0'
 gem 'redis', '>= 4.0.1'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'vite_rails', '~> 3.0'
+gem 'ruby-vips'
+gem 'enumerize'
 
 # Auth
 gem 'devise'
@@ -19,6 +21,16 @@ gem 'rolify'
 
 # Policy
 gem 'pundit', '~> 2.4'
+gem 'image_processing'
+gem 'active_storage_validations'
+
+# Job
+gem 'sidekiq'
+gem 'sidekiq-unique-jobs'
+gem 'sidekiq-scheduler'
+
+# Seed
+gem 'seedbank'
 
 # Front-end
 gem 'slim-rails', '~> 3.6', '>= 3.6.3'
@@ -58,6 +70,7 @@ group :development do
   gem 'ruby-lsp'
   gem 'ruby-lsp-rails'
   gem 'web-console'
+  gem 'bullet'
 end
 
 group :test do

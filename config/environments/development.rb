@@ -3,6 +3,15 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.add_footer = true
+  end
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -18,6 +27,9 @@ Rails.application.configure do
 
   # Enable server timing.
   config.server_timing = true
+
+  # Store files locally.
+  config.active_storage.service = :local
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -66,4 +78,20 @@ Rails.application.configure do
   # Disable `Link: ... rel=preload` header to work around Safari caching bug
   # https://bugs.webkit.org/show_bug.cgi?id=193533
   config.action_view.preload_links_header = false
+
+  # Action mailer default url
+  config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
+
+  # Bullet enable
+  config.after_initialize do
+    Bullet.enable = true
+    # Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+  end
+
+  # Letter opener delivery
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 end
