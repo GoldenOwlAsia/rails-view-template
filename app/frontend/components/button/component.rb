@@ -73,6 +73,6 @@ class Button::Component < ApplicationViewComponent
   end
 
   def open_new?
-    new_tab ? '_blank' : nil
+    new_tab ? '_blank' : false
   end
 end

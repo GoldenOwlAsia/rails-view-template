@@ -1,55 +1,55 @@
-div class="bg-base-100 text-base-content sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]"
+div class='bg-base-100 text-base-content sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]'
   .navbar.w-full
     .flex-none
-      label.btn.btn-square.btn-ghost.drawer-button[for="my-drawer"]
-        svg.inline-block.w-6.h-6.stroke-current[xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24"]
-          path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"]
+      label.btn.btn-square.btn-ghost.drawer-button[for='my-drawer']
+        svg.inline-block.w-6.h-6.stroke-current[xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24']
+          path[stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16']
     .flex-none.px-2.mx-2
       span.text-lg.font-bold
-        a.flex-0.btn.btn-ghost.px-2[href="/" aria-current="page" aria-label="Homepage"]
-          svg[width="32" height="32" viewbox="0 0 415 415" xmlns="http://www.w3.org/2000/svg"]
-            rect[x="82.5" y="290" width="250" height="125" rx="62.5" fill="#1AD1A5"]
-            circle[cx="207.5" cy="135" r="130" fill="black" fill-opacity=".3"]
-            circle[cx="207.5" cy="135" r="125" fill="white"]
-            circle[cx="207.5" cy="135" r="56" fill="#FF9903"]
-      div class="font-title inline-flex text-lg md:text-2xl"
+        a.flex-0.btn.btn-ghost.px-2[href='/' aria-current='page' aria-label='Homepage']
+          svg[width='32' height='32' viewbox='0 0 415 415' xmlns='http://www.w3.org/2000/svg']
+            rect[x='82.5' y='290' width='250' height='125' rx='62.5' fill='#1AD1A5']
+            circle[cx='207.5' cy='135' r='130' fill='black' fill-opacity='.3']
+            circle[cx='207.5' cy='135' r='125' fill='white']
+            circle[cx='207.5' cy='135' r='56' fill='#FF9903']
+      div class='font-title inline-flex text-lg md:text-2xl'
         span.lowercase
           | daisy
-        span class="uppercase text-[#1AD1A5]"
+        span class='uppercase text-[#1AD1A5]'
           | UI
-    div class="form-control hidden md:flex"
-      input class="input input-bordered w-24 md:w-auto" type="text" placeholder="Search"
-    div class="flex justify-center flex-1 px-2 mx-2"
+    div class='form-control hidden md:flex'
+      input class='input input-bordered w-24 md:w-auto' type='text' placeholder='Search'
+    div class='flex justify-center flex-1 px-2 mx-2'
       .items-stretch.hidden.lg:flex
-        a.btn.btn-ghost.btn-sm.rounded-btn[href="/"]
+        a.btn.btn-ghost.btn-sm.rounded-btn[href='/']
           |  Home
-        a.btn.btn-ghost.btn-sm.rounded-btn[href="/"]
+        a.btn.btn-ghost.btn-sm.rounded-btn[href='/']
           |  Themes
-        a.btn.btn-ghost.btn-sm.rounded-btn[href="/"]
+        a.btn.btn-ghost.btn-sm.rounded-btn[href='/']
           |  Pages
-        a.btn.btn-ghost.btn-sm.rounded-btn[href="/"]
+        a.btn.btn-ghost.btn-sm.rounded-btn[href='/']
           |  Icons
-        a.btn.btn-ghost.btn-sm.rounded-btn[href="/" target="_blank"]
+        a.btn.btn-ghost.btn-sm.rounded-btn[href='/' target='_blank']
           |  Source
-    .dropdown.dropdown-end[title="Change Theme"]
-      .m-1.normal-case.btn-ghost.btn[tabindex="0"]
+    .dropdown.dropdown-end[title='Change Theme']
+      .m-1.normal-case.btn-ghost.btn[tabindex='0']
         = lucide_icon('swatch-book')
-        span class="hidden md:inline"
+        span class='hidden md:inline'
           |  Change Theme
         = lucide_icon('chevron-down', class: 'w-4 h-4')
-      div class="mt-14 overflow-y-auto shadow-2xl top-px dropdown-content h-96 w-52 z-[1] rounded-b-box bg-base-200 text-base-content"
-        ul.p-4.menu.compact[data-controller="theme"]
+      div class='mt-14 overflow-y-auto shadow-2xl top-px dropdown-content h-96 w-52 z-[1] rounded-b-box bg-base-200 text-base-content'
+        ul.p-4.menu.compact[data-controller='theme']
           - themes.each do |theme|
             li
-              a tabindex="0" data-action="click->theme#switch" data-theme-value="#{theme}"
+              a tabindex='0' data-action='click->theme#switch' data-theme-value="#{theme}"
                 = theme.humanize
     .flex-none.gap-2
       - if user_signed_in?
         .dropdown.dropdown-end
-          label.btn.btn-ghost.btn-circle.avatar[tabindex="0"]
-          .w-10.rounded-full
-            img alt="Avatar" src="https://i.pravatar.cc/500?img=#{(1..70).to_a.sample}"
-          ul class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52" [tabindex="0"]
+          div class='btn btn-ghost btn-circle avatar' tabindex='0'
+            div class='w-10 rounded-full'
+              img alt='Avatar' src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
+          ul class='mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52' tabindex='0'
             li
               a.justify-between
                 |  Profile
@@ -58,6 +58,6 @@ div class="bg-base-100 text-base-content sticky top-0 z-30 flex h-16 w-full just
             li
               a Settings
             li
-              = button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: false }
+              = button_to 'Log out', destroy_user_session_path, method: :delete, data: { turbo: false }
       - else
-        = link_to "Sign In", new_user_session_path, class:"btn btn-ghost btn-sm rounded-btn", data: { turbo: false }
+        = link_to 'Sign In', new_user_session_path, class:'btn btn-ghost btn-sm rounded-btn', data: { turbo: false }

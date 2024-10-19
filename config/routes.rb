@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     mount Lookbook::Engine, at: '/lookbook'
   end
 
+  authenticate :user, lambda { |u| u.has_role?(:super_admin) } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   devise_for :users
 
   root 'home#index'

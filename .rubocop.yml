@@ -24,6 +24,7 @@ AllCops:
     - vendor/**/*
     - lib/tasks/**/*
     - config/initializers/**/*
+    - db/**/*
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
