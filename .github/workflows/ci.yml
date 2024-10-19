@@ -93,4 +93,4 @@ jobs:
         run: npx --yes ci
 
       - name: Lint JavaScript files with eslint
-        run: yarn lint:js
+        run: yarn lint
