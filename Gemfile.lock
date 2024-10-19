@@ -429,7 +429,7 @@ GEM
     useragent (0.16.10)
     vcr (6.3.1)
       base64
-    view_component (3.17.0)
+    view_component (3.18.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -529,7 +529,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   vcr
-  view_component (~> 3.17)
+  view_component (~> 3.18)
   view_component-contrib (~> 0.2.3)
   vite_rails (~> 3.0)
   web-console

@@ -35,7 +35,7 @@ gem 'seedbank'
 gem 'slim-rails', '~> 3.6', '>= 3.6.3'
 gem 'dry-initializer', '~> 3.1'
 gem 'dry-types', '~> 1.7', '>= 1.7.2'
-gem 'view_component', '~> 3.17'
+gem 'view_component', '~> 3.18'
 gem 'view_component-contrib', '~> 0.2.3'
 gem 'simple_form'
 
