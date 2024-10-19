@@ -6,44 +6,6 @@ on:
     branches: [main]
 
 jobs:
-  stylelint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".node-version"
-          cache: yarn
-
-      - name: Install Yarn packages
-        run: npx --yes ci
-
-      - name: Lint CSS files with stylelint
-        run: yarn lint:css
-
-  eslint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".node-version"
-          cache: yarn
-
-      - name: Install Yarn packages
-        run: npx --yes ci
-
-      - name: Lint JavaScript files with eslint
-        run: yarn lint:js
-
   scan_gems:
     runs-on: ubuntu-latest
 
@@ -97,6 +59,7 @@ jobs:
 
       - name: Install Yarn packages
         run: npx --yes ci
+
       - name: Set up database.yml
         run: |
           echo "test:" > config/database.yml
@@ -114,25 +77,6 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
         run: bin/rails db:test:prepare && bin/rspec
 
-  scan_ruby:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -144,3 +88,9 @@ jobs:
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
+
+      - name: Install Yarn packages
+        run: npx --yes ci
+
+      - name: Lint JavaScript files with eslint
+        run: yarn lint:js

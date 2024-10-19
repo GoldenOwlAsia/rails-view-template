@@ -1,10 +1,14 @@
 # Description
--------
+
+---
+
 # Fixes (issue)
-------
+
+---
+
 # Screenshot
 
-------
+---
 
 # Checklist
 

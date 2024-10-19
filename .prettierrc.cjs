@@ -1,6 +1,10 @@
-/** @type {import("prettier").Config} */
+/** @type {import(prettier").Config} */
 
+// eslint-disable-next-line no-undef
 module.exports = {
   tabWidth: 2,
-  useTabs: false,
+  printWidth: 120,
+  trailingComma: "all",
+  semi: true,
+  singleQuote: true,
 };
