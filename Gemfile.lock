@@ -515,7 +515,6 @@ DEPENDENCIES
   rubocop-rails (>= 2.22.0)
   ruby-lsp
   ruby-lsp-rails
-  ruby-vips
   seedbank
   sentry-rails
   sentry-ruby
