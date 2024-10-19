@@ -12,7 +12,7 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'vite_rails', '~> 3.0'
-gem 'ruby-vips'
+gem 'image_processing'
 gem 'enumerize'
 
 # Auth
@@ -21,7 +21,6 @@ gem 'rolify'
 
 # Policy
 gem 'pundit', '~> 2.4'
-gem 'image_processing'
 gem 'active_storage_validations'
 
 # Job
