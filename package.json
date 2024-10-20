@@ -12,6 +12,8 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.5",
+    "choices.js": "^11.0.2",
+    "flatpickr": "^4.6.13",
     "lucide": "^0.453.0",
     "rollup": "^4.2.0",
     "stimulus-vite-helpers": "^3.1.0",
