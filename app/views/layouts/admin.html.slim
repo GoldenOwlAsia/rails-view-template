@@ -12,9 +12,9 @@ html[lang="en"]
     link[rel="icon" href="/icon.png" type="image/png"]
     link[rel="icon" href="/icon.svg" type="image/svg+xml"]
     link[rel="apple-touch-icon" href="/icon.png"]
-    = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
+    = javascript_include_tag "admin", "data-turbo-track": "reload", type: "module"
     = vite_client_tag
-    = vite_javascript_tag "application", "data-turbo-track": "reload"
+    = vite_javascript_tag "admin", "data-turbo-track": "reload"
   body data-controller="icons"
     = render "layouts/admin_header"
     = yield
