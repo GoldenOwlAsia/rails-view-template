@@ -18,6 +18,16 @@ Rails.application.routes.draw do
       omniauth_callbacks: 'authentication/omniauth_callbacks'
     }
 
+  namespace :admin do
+    resources :users
+
+    root to: 'users#index'
+  end
+
+  namespace :employees do
+    # Add employee routes here
+  end
+
   root 'home#index'
   get 'up' => 'rails/health#show', as: :rails_health_check
 end

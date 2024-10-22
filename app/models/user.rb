@@ -52,4 +52,8 @@ class User < ApplicationRecord
       password: Devise.friendly_token[0, 20]
     ).find_or_create_by!(email: u[:email])
   end
+
+  def admin?
+    has_role?(:admin)
+  end
 end

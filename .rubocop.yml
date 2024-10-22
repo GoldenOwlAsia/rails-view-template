@@ -249,10 +249,12 @@ Metrics/MethodLength:
   Max: 30
   Exclude:
     - db/migrate/*.rb
-    - app/services/import/staffs.rb
 
 Metrics/ParameterLists:
   Enabled: false
 
 Naming/BlockForwarding:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
   Enabled: false
