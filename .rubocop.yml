@@ -51,10 +51,6 @@ Layout/HashAlignment:
   EnforcedColonStyle: key
   EnforcedLastArgumentHashStyle: always_inspect
 
-Layout/LineLength:
-  Exclude:
-    - config/initializers/content_security_policy.rb
-
 Layout/MultilineArrayLineBreaks:
   Enabled: true
 
@@ -63,9 +59,6 @@ Layout/MultilineHashKeyLineBreaks:
 
 Layout/MultilineMethodArgumentLineBreaks:
   Enabled: true
-
-Layout/MultilineMethodCallIndentation:
-  EnforcedStyle: indented
 
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
@@ -82,37 +75,16 @@ Lint/UselessAccessModifier:
   MethodCreatingMethods:
     - delegate
 
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/BlockLength:
-  Max: 25
-  Exclude:
-    - config/**/*
-    - test/**/*
-
 Metrics/ClassLength:
-  Max: 200
+  Max: 250
   Exclude:
     - test/**/*
 
 Metrics/CyclomaticComplexity:
   Enabled: false
 
-Metrics/MethodLength:
-  Max: 25
-  Exclude:
-    - bin/setup
-    - db/migrate/*
-    - test/**/*
-
-Metrics/ModuleLength:
-  Max: 200
-  Exclude:
-    - config/**/*
-
 Metrics/ParameterLists:
-  Max: 6
+  Max: 4
   Exclude:
     - app/frontend/components/**/preview.rb
 
@@ -144,13 +116,11 @@ Layout/LineLength:
   Max: 160
   Exclude:
     - db/migrate/*.rb
+    - config/initializers/content_security_policy.rb
 
 Lint/MissingSuper:
   Exclude:
     - app/services/**/*
-
-Lint/UselessAccessModifier:
-  Enabled: false
 
 Style/AndOr:
   Enabled: false
@@ -239,9 +209,6 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*
 
-Metrics/ClassLength:
-  Max: 250
-
 Metrics/ModuleLength:
   Max: 250
 
@@ -249,9 +216,6 @@ Metrics/MethodLength:
   Max: 30
   Exclude:
     - db/migrate/*.rb
-
-Metrics/ParameterLists:
-  Enabled: false
 
 Naming/BlockForwarding:
   Enabled: false
