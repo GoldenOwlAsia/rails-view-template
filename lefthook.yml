@@ -1,20 +1,22 @@
 commit-msg:
   commands:
     lint-commit-msg:
-      run: ruby .hooks/lint_commit_msg.rb
+      run: yarn commitlint --edit $1
 
 pre-commit:
+  parallel: true
   commands:
-    frontend-linter:
-      run: yarn lint:js
-    backend-linter:
+    eslint_check:
+      glob: '*.js'
+      run: yarn run eslint {staged_files}
+    rubocop_check:
+      glob: '*.rb'
       run: bundle exec rubocop --force-exclusion {staged_files}
-    frontend-style:
-      run: yarn lint:css
-
-pre-push:
-  commands:
-    client-tests:
-      root: "client/"
-      glob: "*.{ts,tsx}"
-      run: yarn test
+# TODO: If you want to check rspec or bundle-audit before pushing, add them here:
+# pre-push:
+#   1_rspec:
+#     skip_empty: false
+#     run: bundle exec rspec
+#   2_bundle-audit:
+#     skip_empty: false
+#     run: bundle exec bundle-audit check

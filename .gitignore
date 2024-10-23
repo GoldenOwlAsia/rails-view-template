@@ -50,3 +50,5 @@ node_modules
 
 !/.env.sample
 config/database.yml
+
+/.husky
