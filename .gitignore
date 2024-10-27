@@ -51,4 +51,8 @@ node_modules
 !/.env.sample
 config/database.yml
 
+# Ignore husky
 /.husky
+
+# Ignore coverage
+coverage/**/*

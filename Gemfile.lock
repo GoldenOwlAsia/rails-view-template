@@ -127,6 +127,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.1)
+    docile (1.4.1)
     dotenv (3.1.4)
     drb (2.2.1)
     dry-cli (1.2.0)
@@ -327,6 +328,10 @@ GEM
       activesupport (= 7.2.1.1)
       bundler (>= 1.15.0)
       railties (= 7.2.1.1)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -445,6 +450,12 @@ GEM
     simple_form (5.3.1)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.1)
+    simplecov_json_formatter (0.1.4)
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
@@ -556,6 +567,7 @@ DEPENDENCIES
   puma (>= 5.0)
   pundit (~> 2.4)
   rails (~> 7.2.0)
+  rails-controller-testing
   rails-mermaid_erd
   redis (>= 4.0.1)
   rolify
@@ -574,6 +586,7 @@ DEPENDENCIES
   sidekiq-scheduler
   sidekiq-unique-jobs
   simple_form
+  simplecov
   slim-rails (~> 3.6, >= 3.6.3)
   stackprof
   stimulus-rails
