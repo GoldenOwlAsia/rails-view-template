@@ -56,4 +56,8 @@ class User < ApplicationRecord
   def admin?
     has_role?(:admin)
   end
+
+  def employee?
+    !admin? && has_role?(:employee)
+  end
 end

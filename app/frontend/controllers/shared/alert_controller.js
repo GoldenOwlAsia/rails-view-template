@@ -19,6 +19,7 @@ export default class extends Controller {
         'opacity-0',
       );
     }, timeout);
+
     // Remove element from DOM after transition
     setTimeout(() => {
       this.element.remove();

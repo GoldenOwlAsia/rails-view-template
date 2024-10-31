@@ -106,9 +106,7 @@ To setup a development environment (MacOS):
 ### FE references
 
 - DaisyUI: <https://daisyui.com/components/>
-- Flowbite: <https://flowbite.com/#components>
 - For icons: lucide icon packages: <https://lucide.dev/icons/>
-- View_component (`TODO`): It is only in `beta` version, we advise you to avoid using it. With components from view_component, we can view them at <http://localhost:3000/lookbook>
 
 ### Rspec
 

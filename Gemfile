@@ -36,10 +36,6 @@ gem 'faker'
 
 # Front-end
 gem 'slim-rails', '~> 3.6', '>= 3.6.3'
-gem 'dry-initializer', '~> 3.1'
-gem 'dry-types', '~> 1.7', '>= 1.7.2'
-gem 'view_component', '~> 3.17'
-gem 'view_component-contrib', '~> 0.2.3'
 gem 'simple_form'
 
 # Pagination
@@ -63,7 +59,6 @@ group :development do
   gem 'bundler-audit', require: false
   gem 'lefthook'
   gem 'letter_opener'
-  gem 'lookbook'
   gem 'pgcli-rails'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false

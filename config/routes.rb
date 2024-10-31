@@ -2,8 +2,6 @@
 
 Rails.application.routes.draw do
   if Rails.env.development?
-    mount Lookbook::Engine, at: '/lookbook'
-    # ERD
     get '/erd', to: 'docs#erd'
   end
 
