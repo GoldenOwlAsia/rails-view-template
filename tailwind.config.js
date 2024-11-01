@@ -10,7 +10,6 @@ module.exports = {
     'app/frontend/entrypoints/*.js',
     'app/frontend/stylesheets/*.scss',
     'app/frontend/images/icons/*.svg',
-    'app/frontend/components/**/**/*.{rb,slim,html.slim,js,scss}',
     'config/initializers/simple_form.rb',
     'config/initializers/simple_form_daisyui.rb',
     'app/views/**/**/*.{html,html.erb,erb,js,ts,rb,slim,html.slim}',
