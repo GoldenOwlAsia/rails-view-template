@@ -6,7 +6,7 @@ gem 'bootsnap', require: false
 gem 'good_migrations'
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 7.2.0'
+gem 'rails', '~> 7.2.2'
 gem 'redis', '>= 4.0.1'
 gem 'stimulus-rails'
 gem 'turbo-rails'
