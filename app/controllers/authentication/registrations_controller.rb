@@ -2,13 +2,9 @@ module Authentication
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_permitted_parameters
 
-    def new
-      head :forbidden
-    end
+    def new; end
 
-    def create
-      head :forbidden
-    end
+    def create; end
 
     protected
 

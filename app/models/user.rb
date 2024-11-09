@@ -43,14 +43,17 @@ class User < ApplicationRecord
   # validations
   validates :avatar,
     content_type: /\Aimage\/.*\z/,
-    size: { less_than: 10.megabytes, message: I18n.t('activerecord.errors.models.user.attributes.avatar.size', size: 10) }
+    size: {
+      less_than: 10.megabytes,
+      message: I18n.t('activerecord.errors.models.user.attributes.avatar.size', size: 10)
+    }
 
   def self.from_google(google_params)
     create_with(
       uid: google_params[:uid],
       provider: 'google',
       password: Devise.friendly_token[0, 20]
-    ).find_or_create_by!(email: u[:email])
+    ).find_or_create_by!(email: google_params[:email])
   end
 
   def admin?

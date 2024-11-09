@@ -15,7 +15,7 @@ en:
       failed: 'Unable to import %{model}'
   activerecord:
     errors:
-      model:
+      models:
         user:
           attributes:
             avatar:

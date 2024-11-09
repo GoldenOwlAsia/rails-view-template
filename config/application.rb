@@ -43,5 +43,10 @@ module RailsBoilerplate
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    routes.default_url_options = {
+      host: ENV.fetch('APP_HOST', 'localhost:3000'),
+      protocol: ENV.fetch('APP_PROTOCOL', 'http')
+    }
   end
 end
