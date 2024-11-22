@@ -46,6 +46,9 @@ gem 'stackprof'
 gem 'sentry-ruby'
 gem 'sentry-rails'
 
+gem 'web-console'
+
+
 group :development, :test do
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
@@ -66,7 +69,6 @@ group :development do
   gem 'rubocop-rails', '>= 2.22.0', require: false
   gem 'ruby-lsp'
   gem 'ruby-lsp-rails'
-  gem 'web-console'
   gem 'bullet'
   gem 'rails-mermaid_erd'
   gem 'i18n-tasks'
