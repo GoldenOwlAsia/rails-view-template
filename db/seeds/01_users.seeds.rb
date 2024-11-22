@@ -1,7 +1,7 @@
 puts '===> create users'
 
 puts '---- super admin'
-super_admin_email = 'super_admin.gos@rails_boilerplate.com'
+super_admin_email = 'super_admin.gos@rails.boilerplate.com'
 if User.find_by(email: super_admin_email).blank?
   super_admin = User.create!(
     email: super_admin_email,
