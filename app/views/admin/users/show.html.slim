@@ -1,0 +1,7 @@
+.container.mx-auto.px-4
+  h2.mt-8.text-2xl.font-bold.leading-9.tracking-tight.text-primary
+    | Show User
+  h5
+    = "Email: #{@user.email}"
+  h5
+    = "Roles: #{@user.roles_name.map(&:titleize).join(', ')}"
