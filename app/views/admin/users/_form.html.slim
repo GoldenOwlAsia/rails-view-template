@@ -1,0 +1,10 @@
+= simple_form_for(user, url: admin_user_path(user, format: :html)) do |f|
+  = f.error_notification
+  .form-inputs.mt-4
+    = f.input :email,
+      required: true,
+      label: false,
+      placeholder: "Email",
+      input_html: { autocomplete: "email" }
+  .form-actions
+    = f.button :submit, "Save", class: "w-full"
