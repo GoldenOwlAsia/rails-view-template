@@ -1,5 +1,6 @@
 require:
   - rubocop-factory_bot
+plugins:
   - rubocop-performance
   - rubocop-rails
 
@@ -25,6 +26,7 @@ AllCops:
     - lib/tasks/**/*
     - config/initializers/**/*
     - db/**/*
+  SuggestExtensions: false
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
