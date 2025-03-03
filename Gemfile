@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'bootsnap', require: false
 gem 'good_migrations'
-gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.5'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 7.2.0'
 gem 'redis', '>= 4.0.1'
@@ -36,10 +36,6 @@ gem 'faker'
 
 # Front-end
 gem 'slim-rails', '~> 3.6', '>= 3.6.3'
-gem 'dry-initializer', '~> 3.1'
-gem 'dry-types', '~> 1.7', '>= 1.7.2'
-gem 'view_component', '~> 3.17'
-gem 'view_component-contrib', '~> 0.2.3'
 gem 'simple_form'
 
 # Pagination
@@ -49,6 +45,8 @@ gem 'pagy'
 gem 'stackprof'
 gem 'sentry-ruby'
 gem 'sentry-rails'
+
+gem 'web-console'
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -63,7 +61,6 @@ group :development do
   gem 'bundler-audit', require: false
   gem 'lefthook'
   gem 'letter_opener'
-  gem 'lookbook'
   gem 'pgcli-rails'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false
@@ -71,9 +68,9 @@ group :development do
   gem 'rubocop-rails', '>= 2.22.0', require: false
   gem 'ruby-lsp'
   gem 'ruby-lsp-rails'
-  gem 'web-console'
   gem 'bullet'
   gem 'rails-mermaid_erd'
+  gem 'i18n-tasks'
 end
 
 group :test do

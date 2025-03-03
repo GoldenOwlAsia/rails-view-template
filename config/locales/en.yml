@@ -1,22 +1,23 @@
+---
 en:
-  common:
-    create:
-      success: 'Created %{model} successfully'
-      failed: 'Unable to create %{model}'
-      exists: '%{model} already existed'
-    update:
-      success: 'Updated %{model} successfully'
-      failed: 'Unable to update %{model}'
-    delete:
-      success: 'Deleted %{model} successfully'
-      failed: 'Unable to delete %{model}'
-    import:
-      success: 'Import %{model} successfully'
-      failed: 'Unable to import %{model}'
   activerecord:
     errors:
-      model:
+      models:
         user:
           attributes:
             avatar:
-              size: 'File size must be less than %{size} MB'
+              size: File size must be less than %{size} MB
+  common:
+    create:
+      exists: "%{model} already existed"
+      failed: Unable to create %{model}
+      success: Created %{model} successfully
+    delete:
+      failed: Unable to delete %{model}
+      success: Deleted %{model} successfully
+    import:
+      failed: Unable to import %{model}
+      success: Import %{model} successfully
+    update:
+      failed: Unable to update %{model}
+      success: Updated %{model} successfully

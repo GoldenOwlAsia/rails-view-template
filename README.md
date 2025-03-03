@@ -106,9 +106,7 @@ To setup a development environment (MacOS):
 ### FE references
 
 - DaisyUI: <https://daisyui.com/components/>
-- Flowbite: <https://flowbite.com/#components>
 - For icons: lucide icon packages: <https://lucide.dev/icons/>
-- View_component (`TODO`): It is only in `beta` version, we advise you to avoid using it. With components from view_component, we can view them at <http://localhost:3000/lookbook>
 
 ### Rspec
 
@@ -141,3 +139,31 @@ To setup a development environment (MacOS):
   ```sh
     bundle exec lefthook install
   ```
+
+### For create tag & release - github
+
+- Use git-cliff: install with brew
+
+  ```sh
+    brew install git-cliff
+  ```
+
+  or
+
+  ```sh
+    git cliff --bump
+  ```
+
+- create version with git-cliff:
+
+  ```sh
+    git cliff --tag 1.0.0 --output CHANGELOG.md
+  ```
+
+- example:
+
+  ```sh
+    git tag -a 1.0.0 -m "Release version 1.0.0"
+  ```
+
+  - Can use github CLI to generate in local or create new release in github and copy changes logs from file `CHANGELOG.md`

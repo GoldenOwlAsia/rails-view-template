@@ -2,14 +2,13 @@ doctype html
 html.h-full.bg-base[lang="en"]
   head
     = render "layouts/head"
-  body.h-full.drawer.drawer-end
+  body.h-full.drawer.drawer-end data-controller="icons"
     input#my-drawer.drawer-toggle[type="checkbox"]
     div class="flex min-h-full drawer-content"
       div class="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
         div class="mx-auto w-full max-w-sm lg:w-96"
           div class="absolute.top-2.right-2" title="Change Theme"
-            label class="btn btn-square btn-ghost drawer-button text-primary" for="my-drawer"
-              = lucide_icon('swatch-book')
+            = render 'shared/switch_theme'
           div
             a class="flex-0 btn btn-ghost px-2" href="/" aria-current="page" aria-label="Homepage"
               svg[width="32" height="32" viewbox="0 0 415 415" xmlns="http://www.w3.org/2000/svg"]
@@ -37,23 +36,3 @@ html.h-full.bg-base[lang="en"]
 
         img class="absolute inset-0 w-full h-full bg-top bg-cover object-cover opacity-90 max-w-full" src="#{random_bg.sample}" alt=""
         div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-base-100 to-transparent w-full" aria-hidden="true"
-    .drawer-side
-      label.drawer-overlay[for="my-drawer"]
-      ul.menu.px-4.py-0.w-80.bg-base-200.text-base-content[data-controller="theme"]
-        - themes.each do |theme|
-          li
-            a tabindex="0" class="after:absolute after:inset-0" data-action="click->theme#switch" data-theme-value="#{theme}"
-              = theme.humanize
-            div class="flex flex-wrap gap-1 ms-auto" data-theme="#{theme}"
-            div class="bg-primary flex aspect-square w-5 items-center justify-center rounded lg:w-6"
-              .text-primary-content.text-sm.font-bold
-                | A
-            div class="bg-secondary flex aspect-square w-5 items-center justify-center rounded lg:w-6"
-              .text-secondary-content.text-sm.font-bold
-                | A
-            div class="bg-accent flex aspect-square w-5 items-center justify-center rounded lg:w-6"
-              .text-accent-content.text-sm.font-bold
-                | A
-            div class="bg-neutral flex aspect-square w-5 items-center justify-center rounded lg:w-6"
-              .text-neutral-content.text-sm.font-bold
-                | A

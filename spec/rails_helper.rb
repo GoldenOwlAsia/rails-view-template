@@ -11,6 +11,7 @@ SimpleCov.start do
   add_group 'Serializers', 'app/serializers'
   add_group 'Services', 'app/services'
   add_group 'Policies', 'app/policies'
+  add_group 'Queries', 'app/queries'
 end
 
 require 'spec_helper'
@@ -21,6 +22,8 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'faker'
 
+Rails.root.glob('spec/supports/**/*.rb').each { |f| require f }
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
@@ -28,13 +31,6 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.include ViewComponent::TestHelpers, type: :view_component
-  config.include Capybara::RSpecMatchers, type: :view_component
-
-  config.define_derived_metadata(file_path: %r{/spec/frontend/components}) do |metadata|
-    metadata[:type] = :view_component
-  end
-
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]

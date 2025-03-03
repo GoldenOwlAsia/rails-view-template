@@ -41,10 +41,11 @@ module Admin
 
     def set_user
       @user = User.find(params[:id])
+      authorize(@user)
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(policy(@user).permitted_attributes)
     end
   end
 end

@@ -56,3 +56,9 @@ config/database.yml
 
 # Ignore coverage
 coverage/**/*
+
+# Ignore erd file
+docs/erd.html
+
+# Ignore CHANGELOG.md file
+CHANGELOG.md

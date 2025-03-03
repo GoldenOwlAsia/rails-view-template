@@ -6,6 +6,8 @@ commit-msg:
 pre-commit:
   parallel: true
   commands:
+    zeitwerk_check:
+      run: bundle exec rails zeitwerk:check
     eslint_check:
       glob: '*.js'
       run: yarn run eslint {staged_files}

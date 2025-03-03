@@ -22,8 +22,6 @@ Bundler.require(*Rails.groups)
 
 module RailsBoilerplate
   class Application < Rails::Application
-    config.autoload_paths << Rails.root.join('app/frontend/components')
-    config.view_component.preview_paths << Rails.root.join('app/frontend/components')
     # Prevents Rails from trying to eager-load the contents of app/frontend
     config.javascript_path = 'frontend'
 
@@ -45,5 +43,18 @@ module RailsBoilerplate
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    routes.default_url_options = {
+      host: ENV.fetch('APP_HOST', 'localhost:3000'),
+      protocol: ENV.fetch('APP_PROTOCOL', 'http')
+    }
+
+    config.i18n.default_locale = :en
+    config.i18n.load_path += Rails.root.glob('config/locales/**/*.{rb, yml}')
+    config.i18n.fallbacks = [I18n.default_locale]
+
+    # Enable web console in browser - protected by devise
+    config.web_console.development_only = false
+    config.web_console.permissions = '0.0.0.0/0'
   end
 end

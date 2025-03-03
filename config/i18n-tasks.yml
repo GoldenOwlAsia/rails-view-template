@@ -1,0 +1,24 @@
+base_locale: en
+locales: [en]
+
+data:
+  read:
+    - config/locales/%{locale}.yml
+    - config/locales/**/*.%{locale}.yml
+  write:
+    - config/locales/%{locale}.yml
+    - config/locales/**/*.%{locale}.yml
+
+search:
+  paths:
+    - app
+    - lib
+    - config/routes.rb
+
+  include:
+    - '*.rb'
+    - '*.erb'
+    - '*.slim'
+translation:
+  backend: google
+  google_translate_api_key: ENV['GOOGLE_TRANSLATE_API_KEY']

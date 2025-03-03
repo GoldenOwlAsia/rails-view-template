@@ -1,18 +1,22 @@
 import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
+  static targets = ['checkbox'];
+
   initialize() {
     this.apply();
   }
 
-  connect() {}
+  connect() {
+    this.checkboxTarget.checked = this.theme === 'light';
+  }
 
   apply() {
     document.documentElement.setAttribute('data-theme', this.theme);
   }
 
-  switch(event) {
-    this.theme = event.target.dataset.themeValue;
-    console.log('switching' + this.theme);
+  switch() {
+    const checkboxVal = this.checkboxTarget.checked;
+    this.theme = checkboxVal ? 'light' : 'dark';
     this.apply();
   }
 
