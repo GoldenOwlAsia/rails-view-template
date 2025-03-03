@@ -139,3 +139,31 @@ To setup a development environment (MacOS):
   ```sh
     bundle exec lefthook install
   ```
+
+### For create tag & release - github
+
+- Use git-cliff: install with brew
+
+  ```sh
+    brew install git-cliff
+  ```
+
+  or
+
+  ```sh
+    git cliff --bump
+  ```
+
+- create version with git-cliff:
+
+  ```sh
+    git cliff --tag 1.0.0 --output CHANGELOG.md
+  ```
+
+- example:
+
+  ```sh
+    git tag -a 1.0.0 -m "Release version 1.0.0"
+  ```
+
+  - Can use github CLI to generate in local or create new release in github and copy changes logs from file `CHANGELOG.md`
