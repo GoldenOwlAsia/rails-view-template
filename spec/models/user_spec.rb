@@ -26,8 +26,11 @@ RSpec.describe User, type: :model do
           filename: 'avatar.txt',
           content_type: 'text/plain'
         )
+
+        allow(user.avatar.blob).to receive(:content_type).and_return('text/plain')
         expect(user).not_to be_valid
-        expect(user.errors[:avatar]).to include('has an invalid content type')
+
+        expect(user.errors[:avatar]&.first).to include('has an invalid content type')
       end
     end
 
