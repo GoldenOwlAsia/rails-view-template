@@ -5,6 +5,14 @@ Rails.application.routes.draw do
     get '/erd', to: 'docs#erd'
   end
 
+  authenticate :user, lambda { |u| u.admin? } do # Consider using role based on application business
+    mount Sidekiq::Web => '/sidekiq'
+
+    unless Rails.env.production?
+      get 'admin/console', to: 'admin/console#index'
+    end
+  end
+
   devise_for :users,
     controllers: {
       sessions: 'authentication/sessions',
