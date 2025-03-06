@@ -35,6 +35,8 @@ class User < ApplicationRecord
     :omniauthable,
     omniauth_providers: [:google_oauth2]
 
+  include Roly
+
   # associations
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_limit: [200, 200]
@@ -57,7 +59,7 @@ class User < ApplicationRecord
   end
 
   def admin?
-    has_role?(:admin)
+    includes_role?(:admin)
   end
 
   def employee?
