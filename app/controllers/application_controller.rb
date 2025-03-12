@@ -28,6 +28,17 @@ class ApplicationController < ActionController::Base
     File.join([controller_path].push(*strs))
   end
 
+  def current_user
+    @current_user ||= super.tap do |user|
+      if user.present?
+        ActiveRecord::Associations::Preloader.new(
+          records: [user],
+          associations: :roles
+        ).call
+      end
+    end
+  end
+
   private
 
   def not_authorized

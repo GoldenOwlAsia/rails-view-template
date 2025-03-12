@@ -1,0 +1,10 @@
+= turbo_frame_tag 'remote_modal' do
+  #remote-modal.modal.modal-blur data-controller='remote-modal' data-remote-modal-target='modal'
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          .modal-title
+            = title
+          button.btn-close type='button' data-action='remote-modal#hideModal'
+        .modal-body#remote_modal_body
+          = yield

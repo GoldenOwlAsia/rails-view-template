@@ -48,6 +48,9 @@ gem 'sentry-rails'
 
 gem 'web-console'
 
+# Search
+gem 'ransack'
+
 group :development, :test do
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'

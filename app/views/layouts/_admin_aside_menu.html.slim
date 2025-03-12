@@ -1,0 +1,75 @@
+aside.bg-base-200.h-screen.w-80.transition-all.duration-300 class="group-[.drawer-mini]:w-20"
+  .flex.flex-col.h-full
+    .p-4.pb-2.flex.justify-between.items-center
+      .flex.items-center.gap-3 class="group-[.drawer-mini]:justify-center"
+        = image_tag "logo.png", class: "w-8 h-8", alt: "Logo"
+        span.font-bold.text-xl class="group-[.drawer-mini]:hidden" Admin Panel
+
+      / Collapse toggle button (only visible on large screens)
+      button.btn.btn-sm.btn-ghost.hidden.lg:flex.items-center.justify-center data-action="click->sidebar#toggleCollapse"
+        i.fa-solid.fa-chevron-left.transition-transform.duration-300 class="group-[.drawer-mini]:rotate-180"
+
+    .divider.my-0
+
+    / Menu items
+    nav.flex-1.px-2.py-2
+      ul.menu.menu-md.gap-2
+        li
+          = link_to 'admin_dashboard_path', class: "flex items-center gap-3 #{current_page?('admin_dashboard_path') ? 'active' : ''}" do
+            i.fa-solid.fa-house
+            span class="group-[.drawer-mini]:hidden" Dashboard
+
+        li
+          = link_to admin_users_path, class: "flex items-center gap-3 #{current_page?(admin_users_path) ? 'active' : ''}" do
+            i.fa-solid.fa-users
+            span class="group-[.drawer-mini]:hidden" Users
+
+        li
+          .collapse
+            input type="checkbox"
+            .collapse-title.p-0
+              .flex.items-center.gap-3.px-4.min-h-12
+                i.fa-solid.fa-box
+                span class="group-[.drawer-mini]:hidden" Products
+                i.fa-solid.fa-chevron-down.ml-auto.transition-transform class="group-[.drawer-mini]:hidden"
+            .collapse-content.pt-0
+              ul.menu.gap-1.pl-6 class="group-[.drawer-mini]:pl-2"
+                li
+                  a.flex.items-center.gap-3 href="#"
+                    i.fa-solid.fa-list.w-4
+                    span class="group-[.drawer-mini]:hidden" All Products
+                li
+                  a.flex.items-center.gap-3 href="#"
+                    i.fa-solid.fa-plus.w-4
+                    span class="group-[.drawer-mini]:hidden" Add Product
+                li
+                  a.flex.items-center.gap-3 href="#"
+                    i.fa-solid.fa-tags.w-4
+                    span class="group-[.drawer-mini]:hidden" Categories
+
+        li
+          = link_to "#", class: "flex items-center gap-3" do
+            i.fa-solid.fa-chart-bar
+            span class="group-[.drawer-mini]:hidden" Reports
+
+        li
+          = link_to "#", class: "flex items-center gap-3" do
+            i.fa-solid.fa-gear
+            span class="group-[.drawer-mini]:hidden" Settings
+
+    .divider.my-0
+
+    / User profile section
+    .p-4.transition-all
+      .flex.items-center.gap-3.mb-4 class="group-[.drawer-mini]:justify-center"
+        .avatar.placeholder
+          .bg-neutral-focus.text-neutral-content.rounded-full.w-8
+            span AM
+        .flex.flex-col class="group-[.drawer-mini]:hidden"
+          p.font-medium Admin User
+          p.text-sm.opacity-70 admin@example.com
+
+      = button_to 'destroy_admin_session_path', method: :delete,
+          class: "btn btn-outline w-full transition-all group-[.drawer-mini]:w-12 group-[.drawer-mini]:h-12 group-[.drawer-mini]:p-0 group-[.drawer-mini]:aspect-square" do
+        i.fa-solid.fa-right-from-bracket
+        span.ml-2 class="group-[.drawer-mini]:hidden" Sign out

@@ -1,2 +1,59 @@
-nav class="bg-white border-gray-200 dark:bg-gray-900"
-  | Add Admin Header here...
+div class="flex-1 flex flex-col md:ml-64"
+  nav class="bg-base-100 border-b border-base-200 px-4 py-3 sticky top-0 z-30"
+    .navbar.gap-2
+      .flex-none
+        label.btn.btn-square.btn-ghost.lg:hidden for="drawer-toggle"
+          i.fas.fa-bars
+
+      .flex-1.gap-2
+        / Breadcrumb
+        .text-sm.breadcrumbs.hidden.sm:inline-flex
+          ul
+            li
+              a href="/admin"
+                i.fas.fa-home.mr-2
+                | Admin
+            li
+              = yield(:page_title) || "Dashboard"
+
+      .flex-none.gap-2
+        / Search
+        .form-control.hidden.md:inline-flex
+          .input-group
+            input type="text" placeholder="Search..." class="input input-bordered w-48"
+            button.btn.btn-square
+              i.fas.fa-search
+
+        / Notifications
+        .dropdown.dropdown-end
+          label.btn.btn-ghost.btn-circle tabindex="0"
+            .indicator
+              i.fas.fa-bell
+              span.badge.badge-sm.badge-primary.indicator-item 3
+
+          ul.mt-3.p-2.shadow.menu.menu-sm.dropdown-content.bg-base-200.rounded-box.w-52.z-50 tabindex="0"
+            li
+              a 1 new message
+            li
+              a 2 new orders
+            li
+              a View all notifications
+
+        / Profile Dropdown
+        .dropdown.dropdown-end
+          label.btn.btn-ghost.btn-circle.avatar.placeholder tabindex="0"
+            .bg-neutral-focus.text-neutral-content.rounded-full.w-10
+              span AM
+
+          ul.mt-3.p-2.shadow.menu.menu-sm.dropdown-content.bg-base-200.rounded-box.w-52.z-50 tabindex="0"
+            li
+              a.justify-between
+                | Profile
+                span.badge.badge-primary Admin
+            li
+              a Settings
+            li.divider
+            li
+              = button_to 'destroy_admin_session_path', method: :delete, class: "w-full text-left" do
+                i.fas.fa-sign-out-alt.mr-2
+                | Sign out

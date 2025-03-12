@@ -1,21 +1,23 @@
 - provide(:title, "User list")
 
-// Just example
 .overflow-x-auto
   table.table
     thead
       tr
-        th
+        th.w-16
+          | #
         th
           | Email
         th
           | Created at
         th
           | Updated at
+        th.w-20
+          | Actions
     tbody
-      - @users.each.with_index(1) do |user, index|
+      - @users.each.with_index(@pagy.from) do |user, index|
         tr.hover
-          th
+          th.text-center
             = index
           td
             = user.email
@@ -23,5 +25,20 @@
             = display_datetime(user.created_at)
           td
             = display_datetime(user.updated_at)
-  .pagy
+          td.relative
+            .dropdown.dropdown-end
+              button.btn.btn-sm.btn-ghost tabindex="0"
+                = lucide_icon 'more-vertical', class: 'w-5 h-5'
+              ul.dropdown-content.menu.p-2.shadow.bg-base-100.rounded-box.w-32.bg-white.z-50
+                li
+                  a href="#"
+                    = lucide_icon 'pencil', class: 'w-4 h-4'
+                    | Edit
+                li
+                  a href="#" class="text-red-600"
+                    = lucide_icon 'trash', class: 'w-4 h-4'
+                    | Remove
+
+  / Pagination
+  .mt-4
     == pagy_nav(@pagy)
