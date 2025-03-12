@@ -1,5 +1,5 @@
 doctype html
-html[lang="en"]
+html[lang="en" data-theme="light"]
   head
     title
       = content_for?(:title) ? strip_tags(yield(:title)) : "Rails Boilerplate"
@@ -14,6 +14,21 @@ html[lang="en"]
     link[rel="apple-touch-icon" href="/icon.png"]
     = vite_client_tag
     = vite_javascript_tag "admin", "data-turbo-track": "reload"
-  body data-controller="icons"
-    = render "layouts/admin_header"
-    = yield
+    link[href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"]
+
+  body.bg-base-100 class=("drawer-mini" if cookies[:sidebar_collapsed] == "true") data-controller="sidebar"
+    .drawer.lg:drawer-open
+      input#drawer-toggle.drawer-toggle type="checkbox"
+      
+      .drawer-content.flex.flex-col
+        / Header
+        = render "layouts/admin_header"
+        
+        / Main Content
+        main.flex-1.p-6
+          = yield
+      
+      / Sidebar
+      .drawer-side.z-40
+        label.drawer-overlay for="drawer-toggle"
+        = render "layouts/admin_aside_menu"

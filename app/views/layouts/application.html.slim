@@ -18,3 +18,5 @@ html[lang="en"]
     = render "layouts/header"
     = yield
     = render "layouts/footer"
+
+  = turbo_frame_tag 'remote_modal', target: '_top'
