@@ -11,7 +11,7 @@ p.mt-2.text-sm.leading-6
               label: false,
               required: true,
               autofocus: true,
-              input_html: { autocomplete: "email" }
+              input_html: { autocomplete: 'email' }
   .form-actions
-    = f.button :submit, "Send me reset password instructions", class: "w-full"
-= render "devise/shared/links"
+    = f.button :submit, 'Send me reset password instructions', class: 'w-full'
+= render 'devise/shared/links'

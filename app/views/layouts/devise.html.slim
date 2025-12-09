@@ -1,7 +1,7 @@
 doctype html
 html.h-full.bg-base[lang="en"]
   head
-    = render "layouts/head"
+    = render 'layouts/head'
   body.h-full.drawer.drawer-end data-controller="icons"
     input#my-drawer.drawer-toggle[type="checkbox"]
     div class="flex min-h-full drawer-content"
@@ -24,15 +24,15 @@ html.h-full.bg-base[lang="en"]
           .mt-10
             = yield
       div class="absolute md:relative flex-1 inset-0 h-96 md:h-full box-content -z-10 w-full"
-        - random_bg = ["https://images.unsplash.com/photo-1656696701010-1b4b17fabd43", \
-                      "https://images.unsplash.com/photo-1668686201559-86e08d59c19d", \
-                      "https://images.unsplash.com/photo-1624396593470-a4a06f5d1947", \
-                      "https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a", \
-                      "https://images.unsplash.com/photo-1522868082931-1b5b29f09ccd", \
-                      "https://images.unsplash.com/photo-1528525953106-e218520108b0", \
-                      "https://images.unsplash.com/photo-1533605130256-1b7ace3b3905", \
-                      "https://images.unsplash.com/photo-1432316212565-b26e2a381ada", \
-                      "https://images.unsplash.com/photo-1433208406127-d9e1a0a1f1aa"]
+        - random_bg = ['https://images.unsplash.com/photo-1656696701010-1b4b17fabd43', 
+                      'https://images.unsplash.com/photo-1668686201559-86e08d59c19d', 
+                      'https://images.unsplash.com/photo-1624396593470-a4a06f5d1947', 
+                      'https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a', 
+                      'https://images.unsplash.com/photo-1522868082931-1b5b29f09ccd', 
+                      'https://images.unsplash.com/photo-1528525953106-e218520108b0', 
+                      'https://images.unsplash.com/photo-1533605130256-1b7ace3b3905', 
+                      'https://images.unsplash.com/photo-1432316212565-b26e2a381ada', 
+                      'https://images.unsplash.com/photo-1433208406127-d9e1a0a1f1aa']
 
         img class="absolute inset-0 w-full h-full bg-top bg-cover object-cover opacity-90 max-w-full" src="#{random_bg.sample}" alt=""
         div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-base-100 to-transparent w-full" aria-hidden="true"

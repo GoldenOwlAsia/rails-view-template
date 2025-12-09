@@ -51,4 +51,4 @@ div class='bg-base-100 text-base-content sticky top-0 z-30 flex h-16 w-full just
             li
               = button_to 'Log out', destroy_user_session_path, method: :delete, data: { turbo: false }
       - else
-        = link_to 'Sign In', new_user_session_path, class:'btn btn-ghost btn-sm rounded-btn', data: { turbo: false }
+        = link_to 'Sign In', new_user_session_path, class: 'btn btn-ghost btn-sm rounded-btn', data: { turbo: false }

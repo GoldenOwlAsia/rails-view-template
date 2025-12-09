@@ -7,7 +7,7 @@ h2
     = f.input :email,
               required: true,
               autofocus: true,
-              input_html: { autocomplete: "email" }
+              input_html: { autocomplete: 'email' }
   .form-actions
-    = f.button :submit, "Resend unlock instructions"
-= render "devise/shared/links"
+    = f.button :submit, 'Resend unlock instructions'
+= render 'devise/shared/links'

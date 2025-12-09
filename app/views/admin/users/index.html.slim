@@ -1,4 +1,4 @@
-- provide(:title, "User list")
+- provide(:title, 'User list')
 
 // Just example
 .overflow-x-auto
@@ -24,4 +24,4 @@
           td
             = display_datetime(user.updated_at)
   .pagy
-    == pagy_nav(@pagy)
+    == @pagy.series_nav(:bulma)

@@ -45,7 +45,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(policy(@user).permitted_attributes)
+      params.expect(user: [policy(@user).permitted_attributes])
     end
   end
 end

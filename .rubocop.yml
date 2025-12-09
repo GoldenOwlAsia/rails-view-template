@@ -1,8 +1,8 @@
-require:
-  - rubocop-factory_bot
 plugins:
-  - rubocop-performance
+  - rubocop-factory_bot
+  - rubocop-slim
   - rubocop-rails
+  - rubocop-performance
 
 inherit_mode:
   merge:

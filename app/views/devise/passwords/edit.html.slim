@@ -6,15 +6,15 @@ h2
   = f.full_error :reset_password_token
   .form-inputs
     = f.input :password,
-              label: "New password",
+              label: 'New password',
               required: true,
               autofocus: true,
               hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-              input_html: { autocomplete: "new-password" }
+              input_html: { autocomplete: 'new-password' }
     = f.input :password_confirmation,
-              label: "Confirm your new password",
+              label: 'Confirm your new password',
               required: true,
-              input_html: { autocomplete: "new-password" }
+              input_html: { autocomplete: 'new-password' }
   .form-actions
-    = f.button :submit, "Change my password"
-= render "devise/shared/links"
+    = f.button :submit, 'Change my password'
+= render 'devise/shared/links'

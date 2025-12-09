@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
+  include Pagy::Method
   include Pundit::Authorization
-  include Pagy::Backend
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_record
@@ -31,7 +30,7 @@ class ApplicationController < ActionController::Base
   private
 
   def not_authorized
-    redirect_back fallback_location: root_path, alert: 'You are not authorized to perform this action.'
+    redirect_back_or_to(root_path, alert: 'You are not authorized to perform this action.')
   end
 
   def rescue_routing_error

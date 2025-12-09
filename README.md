@@ -1,13 +1,13 @@
 # Rails boilerplate - From Golden Owl Solutions
 
-This is a Rails boilerplate use rails 7.2
+This is a Rails boilerplate use rails 8.1.1
 
 ## Prerequisites
 
 This project requires:
 
 - Ruby (see [.ruby-version](./.ruby-version)), preferably managed using [rbenv](https://github.com/rbenv/rbenv) or [asdf](https://asdf-vm.com/)
-- Node 20.9.0
+- Node 23.5.0
 - Yarn 1.x (classic)
 - PostgreSQL must be installed and accepting connections
 
@@ -15,7 +15,7 @@ On macOS, these [Homebrew](http://brew.sh) packages are recommended:
 
 ```sh
   brew install rbenv
-  brew install node 20.9.0
+  brew install node 23.5.0
   brew install yarn
   brew install postgresql@16
   brew install redis
@@ -35,18 +35,18 @@ To setup a development environment (MacOS):
 
 **Install Ruby**:
 
-This project currently uses [Ruby 3.3.0](blob/staging/.ruby-version), which is most easily managed through a version manager like [asdf](https://asdf-vm.com/), [rbenv](https://github.com/rbenv/rbenv)
+This project currently uses [Ruby 3.4.7](blob/staging/.ruby-version), which is most easily managed through a version manager like [asdf](https://asdf-vm.com/), [rbenv](https://github.com/rbenv/rbenv)
 
 **Install Nodejs**:
 
-This project user [Node 20.9.0](https://nodejs.org/en/blog/release/v20.9.0), which is most easily managed through a version manager like [asdf](https://github.com/asdf-vm/asdf-nodejs), [rvm](https://github.com/nvm-sh/nvm)
+This project user [Node 23.5.0 d](https://nodejs.org/en/blog/release/v23.5.0), which is most easily managed through a version manager like [asdf](https://github.com/asdf-vm/asdf-nodejs), [rvm](https://github.com/nvm-sh/nvm)
 
 **Install Ruby gems**:
 
-- install bundle version 2.5.4 (or similar if you are using an older version on your development)
+- install bundle version 2.6.9 (or similar if you are using an older version on your development)
 
   ```sh
-  gem install bundler -v 2.5.4
+  gem install bundler -v 2.6.9
   ```
 
 - bundle
@@ -107,6 +107,14 @@ Later steps expect a `RACK_ENV` environment variable, so define one (usually 'de
 
 - DaisyUI: <https://daisyui.com/components/>
 - For icons: lucide icon packages: <https://lucide.dev/icons/>
+
+### Rubocop
+
+- Run by:
+
+  ```sh
+    bundle exec rubocop
+  ```
 
 ### Rspec
 
