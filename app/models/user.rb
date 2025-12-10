@@ -25,6 +25,7 @@
 #
 class User < ApplicationRecord
   rolify
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -41,12 +42,9 @@ class User < ApplicationRecord
   end
 
   # validations
-  validates :avatar,
-    content_type: /\Aimage\/.*\z/,
-    size: {
-      less_than: 10.megabytes,
-      message: I18n.t('activerecord.errors.models.user.attributes.avatar.size', size: 10)
-    }
+  validates :password, password: true
+  validates :avatar, content_type: /\Aimage\/.*\z/, size: { less_than: 10.megabytes }
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def self.from_google(google_params)
     create_with(
@@ -56,11 +54,16 @@ class User < ApplicationRecord
     ).find_or_create_by!(email: google_params[:email])
   end
 
+  # instance methods
+  def super_admin?
+    has_role?(:super_admin)
+  end
+
   def admin?
     has_role?(:admin)
   end
 
   def employee?
-    !admin? && has_role?(:employee)
+    has_role?(:employee)
   end
 end

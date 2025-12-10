@@ -1,0 +1,4 @@
+# purge_unattached_blobs_job:
+#   queue: low
+#   cron: '0 0 * * *'
+#   class: 'Schedulers::PurgeUnattachedBlobsJob'

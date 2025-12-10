@@ -1,7 +1,3 @@
-# frozen_string_literal: true
-
-# load extras lib
-Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
 
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|

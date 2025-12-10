@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'boot'
 
 require 'rails'
@@ -56,5 +54,8 @@ module RailsBoilerplate
     # Enable web console in browser - protected by devise
     config.web_console.development_only = false
     config.web_console.permissions = '0.0.0.0/0'
+
+    # Allow ngrok to be used in development
+    config.hosts << /[a-z0-9-]+\.ngrok-free\.app/
   end
 end

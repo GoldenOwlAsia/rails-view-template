@@ -1,16 +1,13 @@
-# frozen_string_literal: true
-
 class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
+  include Currentable
   include Pagy::Method
   include Pundit::Authorization
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_record
   rescue_from ActionController::RoutingError, with: :rescue_routing_error
-
-  before_action :set_current_variables, if: :user_signed_in?
 
   def self.only_turbo_stream_for(*actions)
     raise ArgumentError, 'force_turbo_stream_for arguments must have least one item' if actions.blank?
@@ -47,9 +44,5 @@ class ApplicationController < ActionController::Base
 
   def authorize(record, query = nil, policy_class: nil)
     super
-  end
-
-  def set_current_variables
-    Current.user = current_user
   end
 end

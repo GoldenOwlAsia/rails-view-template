@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -34,6 +32,18 @@ class ApplicationPolicy
 
   def destroy?
     false
+  end
+
+  def super_admin?
+    user.has_cached_role?(:super_admin)
+  end
+
+  def admin?
+    user.has_cached_role?(:admin)
+  end
+
+  def employee?
+    user.has_cached_role?(:employee)
   end
 
   class Scope

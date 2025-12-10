@@ -20,8 +20,6 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
-# Policy
-
 # File
 gem 'ruby-vips'
 gem 'image_processing', '~> 1.2'
@@ -70,7 +68,7 @@ end
 group :development do
   gem 'bullet'
   gem 'lefthook'
-  gem 'annotate'
+  gem 'annotaterb'
   gem 'i18n-tasks'
   gem 'pgcli-rails'
   gem 'letter_opener'
