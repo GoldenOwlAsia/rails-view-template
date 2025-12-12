@@ -6,12 +6,19 @@
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
+#  current_sign_in_at     :datetime
+#  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  provider               :string
+#  first_name             :string
+#  last_name              :string
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :string
+#  provider               :integer
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  sign_in_count          :integer          default(0), not null
 #  uid                    :string
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
@@ -25,13 +32,13 @@
 #
 FactoryBot.define do
   factory :user do
-    sequence(:email) { |n| "user#{n}@rails.boilerplate.com" }
-    password { 'Password123!' }
+    sequence(:email) { |n| "user#{n}@gmail.com" }
+    password { 'Password123@' }
     confirmed_at { Time.current }
     after(:build) { |user| user.add_role(:employee) }
 
     trait :admin do
-      sequence(:email) { |n| "admin#{n}@rails.boilerplate.com" }
+      sequence(:email) { |n| "admin#{n}@gmail.com" }
       after(:create) do |user|
         user.remove_role(:employee)
         user.add_role(:admin)

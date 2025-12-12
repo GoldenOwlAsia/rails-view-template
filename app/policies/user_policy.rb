@@ -1,15 +1,4 @@
 class UserPolicy < ApplicationPolicy
-  def permitted_attributes
-    [
-      :email,
-      :password,
-      :password_confirmation,
-      {
-        role_ids: []
-      }
-    ]
-  end
-
   def index?
     admin?
   end

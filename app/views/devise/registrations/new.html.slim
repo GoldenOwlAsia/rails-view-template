@@ -1,28 +1,30 @@
-h2.mt-8.text-2xl.font-bold.leading-9.tracking-tight.text-primary
+.my-4.text-xl.font-bold.tracking-tight.text-primary
   | Sign up new account
-p.mt-2.text-sm.leading-6
-  |  Already a member?
-  a class="font-semibold text-primary hover:text-secondary" href="/users/sign_in"
-    | Sign in
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+
+= simple_form_for(resource, as: resource_name, url: users_sign_up_path, data: { turbo: false, method: :post }) do |f|
   = f.error_notification
-  .form-inputs.mt-4
+  .flex.flex-col.gap-2
     = f.input :email,
       required: true,
       label: false,
       placeholder: 'Email',
-      input_html: { autocomplete: 'email' }
+      input_html: { autocomplete: 'email', class: 'w-full' }
     = f.input :password,
       required: true,
       label: false,
       placeholder: 'Password',
-      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-      input_html: { autocomplete: 'new-password' }
+      input_html: { autocomplete: 'new-password', class: 'w-full' }
     = f.input :password_confirmation,
       required: true,
       label: false,
       placeholder: 'Password confirmation',
-      input_html: { autocomplete: 'new-password' }
+      input_html: { autocomplete: 'new-password', class: 'w-full' }
   .form-actions
     = f.button :submit, 'Sign up', class: 'w-full'
+
+p.mt-2.text-sm.leading-6
+  |  Already a member?
+  a class="font-semibold text-primary hover:text-secondary" href="/users/sign_in"
+    |  Sign in
+
 = render 'devise/shared/links'

@@ -12,6 +12,7 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.20",
+    "@stimulus-components/notification": "^3.0.0",
     "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/vite": "^4.1.17",
     "choices.js": "^11.1.0",

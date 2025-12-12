@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_record
   rescue_from ActionController::RoutingError, with: :rescue_routing_error
 
+  before_action :authenticate_user!
+
   def self.only_turbo_stream_for(*actions)
     raise ArgumentError, 'force_turbo_stream_for arguments must have least one item' if actions.blank?
 

@@ -17,6 +17,7 @@ gem 'devise'
 gem 'pundit'
 gem 'rolify'
 gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
@@ -66,6 +67,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'pry'
   gem 'bullet'
   gem 'lefthook'
   gem 'annotaterb'

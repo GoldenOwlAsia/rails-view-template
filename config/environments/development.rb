@@ -68,7 +68,9 @@ Rails.application.configure do
   # https://bugs.webkit.org/show_bug.cgi?id=193533
   config.action_view.preload_links_header = false
 
-  # Action mailer default url
+  # Action mailer
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
 
   # Bullet enable
@@ -79,8 +81,4 @@ Rails.application.configure do
     Bullet.console = true
     Bullet.rails_logger = true
   end
-
-  # Letter opener delivery
-  config.action_mailer.delivery_method = :letter_opener_web
-  config.action_mailer.perform_deliveries = true
 end
