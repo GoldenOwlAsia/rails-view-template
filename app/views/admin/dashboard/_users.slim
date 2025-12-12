@@ -1,0 +1,80 @@
+.col-span-12.rounded-2xl.bg-base-300.p-6.md:p-8
+  .flex.items-center.justify-between.mb-6
+    .flex.items-center.gap-3
+      .flex.h-14.w-14.items-center.justify-center.rounded-2xl.bg-gradient-to-br.from-purple-50.to-purple-100.dark:from-purple-800.dark:to-purple-900
+        = lucide_icon('activity', class: 'size-6 text-purple-600 dark:text-purple-300')
+      .flex.flex-col
+        div class="text-lg font-semibold text-gray-900" User overview
+    - if @presenter.peak_month_name.present?
+      div class="text-right text-xs text-gray-500 dark:text-gray-400"
+        span class="inline-flex items-center gap-1 rounded-full bg-purple-50 px-2.5 py-1 text-xs font-medium text-purple-700 dark:bg-purple-900/40 dark:text-purple-200"
+          i data-lucide="sparkles" style="width: 14px; height: 14px;"
+          | Peak month:
+          = @presenter.peak_month_name
+
+  div class="grid grid-cols-2 gap-3 md:grid-cols-4"
+    div class="rounded-2xl p-3 text-left bg-base-200"
+      div class="mb-2 flex items-center justify-between"
+        div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
+          i.text-gray-700.dark:text-gray-200 data-lucide="users" style="width: 16px; height: 16px;"
+        span class="text-xs font-medium uppercase tracking-wide text-base-content"
+          | Total users
+      p class="text-xl font-semibold text-base-content"
+        = @presenter.user_count
+
+    div class="rounded-2xl p-3 text-left bg-base-200"
+      div class="mb-2 flex items-center justify-between"
+        div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
+          i.text-gray-700.dark:text-gray-200 data-lucide="calendar" style="width: 16px; height: 16px;"
+        span class="text-xs font-medium uppercase tracking-wide text-base-content"
+          | New this year
+      p class="text-xl font-semibold text-base-content"
+        = @presenter.users_this_year
+
+    div class="rounded-2xl p-3 text-left bg-base-200"
+      div class="mb-2 flex items-center justify-between"
+        div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
+          i.text-gray-700.dark:text-gray-200 data-lucide="plus-circle" style="width: 16px; height: 16px;"
+        span class="text-xs font-medium uppercase tracking-wide text-base-content"
+          | New this month
+      p class="text-xl font-semibold text-base-content"
+        = @presenter.users_this_month
+
+    div class="rounded-2xl p-3 text-left bg-base-200"
+      div class="mb-2 flex items-center justify-between"
+        div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
+          i.text-gray-700.dark:text-gray-200 data-lucide="clock" style="width: 16px; height: 16px;"
+        span class="text-xs font-medium uppercase tracking-wide text-base-content"
+          | New today
+      p class="text-xl font-semibold text-base-content"
+        = @presenter.users_today
+
+  div class="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3"
+    div class="rounded-2xl bg-base-200 p-3 text-left"
+      div class="mb-2 flex items-center justify-between"
+        span class="text-xs font-medium uppercase tracking-wide text-base-content" Avg. / month
+      p class="mt-1 text-xl font-semibold text-base-content"
+        = @presenter.average_users_per_month
+
+    div class="rounded-2xl bg-base-200 p-3 text-left"
+      div class="mb-2 flex items-center justify-between"
+        span class="text-xs font-medium uppercase tracking-wide text-base-content" This month vs last
+      p class="mt-1 text-xl font-semibold text-base-content"
+        = @presenter.user_change_percent
+
+    div class="rounded-2xl bg-base-200 p-3 text-left"
+      div class="mb-2 flex items-center justify-between"
+        span class="text-xs font-medium uppercase tracking-wide text-base-content" Selected year
+      p class="mt-1 text-xl font-semibold text-base-content"
+        = @presenter.year
+
+.col-span-12 class="col-span-6 rounded-2xl bg-base-300 p-6 md:p-8" data-controller='user-area' data-user-area-stats-value=@presenter.user_12_months.to_json
+  div class="mb-6 flex items-center justify-between"
+    div class="flex items-center justify-center gap-2"
+      div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-800 dark:to-blue-900"
+        = lucide_icon('users', class: 'size-6 text-blue-600 dark:text-blue-300')
+      .flex.items-center.gap-2
+        div class="text-3xl font-bold text-gray-900"
+          = @presenter.user_count
+
+  div data-user-area-target='render'

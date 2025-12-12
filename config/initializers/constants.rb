@@ -1,4 +1,6 @@
 module Constants
+  ZERO = 0.0
+
   # Image
   IMAGE_MAX_SIZE = 10.megabytes
   IMAGE_CONTENT_TYPES = /\Aimage\/.*\z/

@@ -1,5 +1,5 @@
 namespace :admin do
-  resources :users
+  root to: 'dashboard#index'
 
-  root to: 'users#index'
+  resources :users
 end
