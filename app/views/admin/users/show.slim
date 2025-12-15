@@ -21,15 +21,11 @@
                 = 'Active Account'
 
           .flex-shrink-0.flex.gap-2
-            = link_to admin_users_path, 
-class: 'inline-flex items-center px-3 py-1 border-2 border-slate-300 rounded-xl shadow-sm text-base font-medium text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 transition-all duration-300' do
-              svg.w-5.h-5.mr-2 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            = link_to admin_users_path, class: 'inline-flex items-center px-3 py-1 border-2 border-slate-300 rounded-xl shadow-sm text-base font-medium text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-400' do
+              = lucide_icon('arrow-left', class: 'w-5 h-5 mr-2')
               | Back
-            = link_to edit_admin_user_path(@user), 
-class: 'inline-flex items-center px-3 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 hover:scale-105' do
-              svg.w-5.h-5.mr-2 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+            = link_to edit_admin_user_path(@user), class: 'inline-flex items-center px-3 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-purple-700' do
+              = lucide_icon('edit', class: 'w-5 h-5 mr-2')
               | Edit
 
     .bg-white.backdrop-blur-sm.bg-opacity-95.border.border-white.border-opacity-20.rounded-3xl.shadow-xl.shadow-slate-200/50.overflow-hidden data-controller="tabs" data-tabs-active-value="personal"

@@ -57,7 +57,7 @@ module Crudable
 
     private
 
-    def assign_resource_class_accessors(options = {}) # rubocop:disable Metrics/AbcSize
+    def assign_resource_class_accessors(options = {}) # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity
       self.resource_class = options.fetch(:class, (name.split('::').last.sub(/Controller$/, '').singularize.constantize rescue nil)) # rubocop:disable Style/RescueModifier
       self.resource_collection_variable = options.fetch(:collection_variable, ("@#{resource_class.name.underscore.pluralize}" rescue :collection)).to_sym # rubocop:disable Style/RescueModifier
       self.resource_object_variable = options.fetch(:object_variable, ("@#{resource_class.name.underscore}" rescue :object)).to_sym # rubocop:disable Style/RescueModifier
