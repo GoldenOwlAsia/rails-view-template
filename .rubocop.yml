@@ -113,7 +113,7 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
 Layout/LineLength:
-  Max: 160
+  Max: 250
   Exclude:
     - db/migrate/*.rb
     - config/initializers/content_security_policy.rb

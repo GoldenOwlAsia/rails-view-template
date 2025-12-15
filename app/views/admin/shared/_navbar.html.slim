@@ -1,4 +1,4 @@
-div class='bg-base-200 text-base-content sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]'
+div class='bg-white border-b border-gray-200 sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]'
   .navbar.w-full.px-4
     .flex.items-center
       a.btn.btn-ghost.px-0[href=root_path aria-current='page' aria-label='Homepage']
@@ -13,8 +13,6 @@ div class='bg-base-200 text-base-content sticky top-0 z-30 flex h-16 w-full just
 
     .flex.items-center.gap-8
       = lucide_icon('bell', class: 'size-6')
-
-      = render 'shared/switch_theme'
 
       .dropdown.dropdown-end
         div class='bg-gray-800 size-10 rounded-full' tabindex='0'

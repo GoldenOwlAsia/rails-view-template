@@ -54,6 +54,9 @@ gem 'sentry-rails'
 gem 'faker'
 gem 'seedbank'
 
+# Search
+gem 'ransack'
+
 # Others
 gem 'enumerize'
 gem 'web-console'

@@ -61,6 +61,10 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
 
   # instance methods
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
+
   def super_admin?
     has_role?(:super_admin)
   end
@@ -71,5 +75,14 @@ class User < ApplicationRecord
 
   def employee?
     has_role?(:employee)
+  end
+
+  # class methods
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[first_name last_name email]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
   end
 end

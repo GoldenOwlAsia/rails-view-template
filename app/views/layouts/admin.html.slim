@@ -15,7 +15,7 @@ html[lang="en"]
     = vite_client_tag
     = vite_javascript_tag 'admin', 'data-turbo-track': 'reload'
     script
-      | document.documentElement.setAttribute('data-theme', window.localStorage.getItem('theme'))
+      | document.documentElement.setAttribute('data-theme', 'light')
   body data-controller="icons theme"
     = render 'shared/flash'
     = render 'admin/shared/navbar'

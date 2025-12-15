@@ -22,12 +22,11 @@ module Crudable
       :resource_collection_includes,
       :resource_object_includes,
       :resource_flash_messages,
-      :resource_searchable,
-      :resource_with_company
+      :resource_searchable
 
     RESOURCE_ACTIONS = %i[index show new create edit update destroy].freeze
 
-    def resource_with(options = {})
+    def crud_to(options = {})
       options.symbolize_keys!
       options.assert_valid_keys(
         :class,
@@ -42,8 +41,7 @@ module Crudable
         :object_includes,
         :flash_messages,
         :only_actions,
-        :except_actions,
-        :with_company
+        :except_actions
       )
 
       only_actions = options.delete(:only_actions)
@@ -54,21 +52,15 @@ module Crudable
 
       assign_resource_class_accessors(options)
       check_define_resource_actions(effect_actions)
+      format_request_resource_actions(effect_actions)
     end
 
     private
 
-    def resource_class_name
-      name.split('::').last.sub(/Controller$/, '').singularize.constantize
-    rescue NameError
-      nil
-    end
-
     def assign_resource_class_accessors(options = {}) # rubocop:disable Metrics/AbcSize
-      self.resource_class = options.fetch(:class, resource_class_name)
-      self.resource_collection_variable = options.fetch(:collection_variable, :@collection).to_sym
-      self.resource_object_variable = options.fetch(:object_variable, :@object).to_sym
-
+      self.resource_class = options.fetch(:class, (name.split('::').last.sub(/Controller$/, '').singularize.constantize rescue nil)) # rubocop:disable Style/RescueModifier
+      self.resource_collection_variable = options.fetch(:collection_variable, ("@#{resource_class.name.underscore.pluralize}" rescue :collection)).to_sym # rubocop:disable Style/RescueModifier
+      self.resource_object_variable = options.fetch(:object_variable, ("@#{resource_class.name.underscore}" rescue :object)).to_sym # rubocop:disable Style/RescueModifier
       self.resource_searchable = options.fetch(:searchable, true)
       self.resource_pagy_variable = :@pagy
       self.resource_query_variable = :@q
@@ -80,8 +72,14 @@ module Crudable
       self.resource_modal_form = options.fetch(:modal_form, false)
       self.resource_collection_includes = options.fetch(:collection_includes, [])
       self.resource_object_includes = options.fetch(:object_includes, [])
-      self.resource_flash_messages = options.fetch(:flash_messages, {})
-      self.resource_with_company = options.fetch(:with_company, true)
+      self.resource_flash_messages = options.fetch(
+        :flash_messages,
+        {
+          created: "#{resource_class&.model_name&.human || 'Object'} was successfully created.",
+          updated: "#{resource_class&.model_name&.human || 'Object'} was successfully updated.",
+          deleted: "#{resource_class&.model_name&.human || 'Object'} was successfully deleted."
+        }
+      )
     end
 
     def check_define_resource_actions(actions)
@@ -89,10 +87,15 @@ module Crudable
         undef_method(action)
       end
     end
+
+    def format_request_resource_actions(actions)
+      effected_actions = actions & %i[new edit]
+      only_turbo_stream_for(*effected_actions) if resource_modal_form
+    end
   end
 
   def index
-    pagy, collection = pagy(instance_variable_get(self.class.resource_collection_variable))
+    pagy, collection = pagy(instance_variable_get(self.class.resource_collection_variable), limit: pagy_limit)
     instance_variable_set(self.class.resource_pagy_variable, pagy)
     instance_variable_set(self.class.resource_collection_variable, collection)
     block_given? ? yield : render(:index)
@@ -107,19 +110,19 @@ module Crudable
   end
 
   def create
-    permitted_attributes = self.class.resource_with_company ? resource_permitted_params.merge(company: current_company) : resource_permitted_params
     object = instance_variable_get(self.class.resource_object_variable)
-    object.assign_attributes(permitted_attributes)
+    object.assign_attributes(resource_permitted_params)
 
     created = object.save
 
     return yield(created) if block_given?
 
     if created
-      set_flash_message(:success, :created)
+      set_flash_message(:notice, :created)
       redirect_to resource_after_create_or_update_path
     else
-      render(:new, status: :unprocessable_content)
+      template = self.class.resource_modal_form ? :reform : :new
+      render(template, status: :unprocessable_content)
     end
   end
 
@@ -134,10 +137,11 @@ module Crudable
     return yield(updated) if block_given?
 
     if updated
-      set_flash_message(:success, :updated)
+      set_flash_message(:notice, :updated)
       redirect_to resource_after_create_or_update_path
     else
-      render(:edit, status: :unprocessable_content)
+      template = self.class.resource_modal_form ? :reform : :edit
+      render(template, status: :unprocessable_content)
     end
   end
 
@@ -147,8 +151,12 @@ module Crudable
 
     return yield(object) if block_given?
 
-    set_flash_message(:success, :deleted)
-    redirect_to(resource_after_destroy_path)
+    set_flash_message(:notice, :deleted)
+
+    respond_to do |format|
+      format.html { redirect_to(resource_after_destroy_path) }
+      format.turbo_stream
+    end
   end
 
   private
@@ -182,8 +190,7 @@ module Crudable
   end
 
   def resource_base_scope
-    scope = policy_scope(self.class.resource_class)
-    self.class.resource_with_company ? scope.where(company: current_company) : scope
+    policy_scope(self.class.resource_class)
   end
 
   def prepare_collection
@@ -202,16 +209,18 @@ module Crudable
   end
 
   def prepare_object
-    object = resource_base_scope.includes(self.class.resource_object_includes).find(params[:id])
+    scope = resource_base_scope.includes(self.class.resource_object_includes)
+    object = find_object(scope, params[:id])
+
     instance_variable_set(self.class.resource_object_variable, object)
     authorize(object)
   end
 
-  def collection
-    instance_variable_get(self.class.resource_collection_variable)
+  def find_object(scope, id)
+    scope.find(id)
   end
 
-  def object
-    instance_variable_get(self.class.resource_object_variable)
+  def pagy_limit
+    Pagy.options[:limit] || 10
   end
 end

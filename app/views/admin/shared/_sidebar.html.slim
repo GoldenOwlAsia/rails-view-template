@@ -1,14 +1,15 @@
-aside id="sidebar" class="fixed bg-base-300 top-0 left-0 z-[20] w-64 h-screen pt-[3.6rem] transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar"
-  div class="h-full px-3 py-4 overflow-y-auto bg-base-300"
-    ul class="space-y-2 font-medium"
-      - menu_items = [\
-        { path: admin_root_path, icon: 'chart-pie', label: 'Dashboard' },\
-        { path: admin_users_path, icon: 'users-round', label: 'Users' },\
-      ]
+aside id="sidebar" class="fixed bg-white border-r border-gray-200 top-0 left-0 z-[20] w-64 h-screen pt-[3.6rem] transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar"
+  div class="h-full px-3 py-4 overflow-y-auto bg-white"
+    / ul class="space-y-2 font-medium"
+    /   - menu_items = [ \
+    /     { path: admin_root_path, icon: 'chart-pie', label: 'Dashboard' }, \
+    /     { path: admin_users_path, icon: 'users-round', label: 'Users' }, \
+    /   ]
 
-      - menu_items.each do |item|
-        - active_class = current_page?(item[:path]) ? 'text-primary hover:bg-base-200' : ''
-        li
-          = link_to item[:path], class: "#{active_class} flex items-center p-2 rounded-lg hover:bg-base-200 group"
-            = lucide_icon(item[:icon], class: 'size-6')
-            span class="ms-3" = item[:label]
+    /   - menu_items.each do |item|
+    /     - active_class = current_page?(item[:path]) ? 'text-primary bg-gray-100 hover:bg-gray-200 group-hover:text-primary' : ''
+
+    /     li
+    /       = link_to item[:path], class: "#{active_class} flex items-center p-2 rounded-lg group"
+    /         = lucide_icon(item[:icon], class: 'size-6')
+    /         span class="ms-3" = item[:label]
