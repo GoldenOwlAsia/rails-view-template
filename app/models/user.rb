@@ -33,7 +33,6 @@
 class User < ApplicationRecord
   rolify
 
-  include Robohash
   extend Enumerize
 
   # Include default devise modules. Others available are:
@@ -46,8 +45,6 @@ class User < ApplicationRecord
     :confirmable,
     :omniauthable,
     omniauth_providers: [:google_oauth2, :facebook]
-
-  robohash [:avatar]
 
   # enums
   enumerize :provider, in: { email: 0, google_oauth2: 1, facebook: 2 }, default: :email, scope: true

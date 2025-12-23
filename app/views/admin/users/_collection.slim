@@ -19,7 +19,7 @@
             td.px-6.py-4
               .flex.items-center.gap-3
                 .relative
-                  = image_tag user.avatar, class: 'w-12 h-12 rounded-full object-cover border-2 border-gray-200 shadow-sm'
+                  = attachment_image_tag user.avatar, class: 'w-12 h-12 rounded-full object-cover border-2 border-gray-200 shadow-sm'
                 .flex-1.min-w-0
                   .text-sm.font-semibold.truncate
                     = user.full_name.presence || 'Unknown User'
@@ -35,13 +35,13 @@
                 = "#{time_ago_in_words(user.created_at)} ago"
             td.px-6.py-4
               .flex.items-center.gap-2
-                = link_to admin_user_path(user), 
-class: 'inline-flex items-center px-3 py-1.5 text-xs font-medium text-green-600 bg-green-50 border border-green-200 rounded-md hover:bg-green-100 hover:border-green-300 transition-all duration-200', 
+                = link_to admin_user_path(user),
+class: 'inline-flex items-center px-3 py-1.5 text-xs font-medium text-green-600 bg-green-50 border border-green-200 rounded-md hover:bg-green-100 hover:border-green-300 transition-all duration-200',
 title: "Show #{user.full_name}"
                   i data-lucide="eye" class="mr-1 w-4 h-4"
                   | Show
-                = link_to edit_admin_user_path(user), 
-class: 'inline-flex items-center px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 transition-all duration-200', 
+                = link_to edit_admin_user_path(user),
+class: 'inline-flex items-center px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 transition-all duration-200',
 title: "Edit #{user.full_name}"
                   i data-lucide="edit" class="mr-1 w-4 h-4"
                   | Edit

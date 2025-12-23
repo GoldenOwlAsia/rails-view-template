@@ -18,7 +18,7 @@ div class='bg-base-100 text-base-content sticky top-0 z-30 flex h-16 w-full just
 
       .dropdown.dropdown-end
         div class='bg-gray-800 size-10 rounded-full' tabindex='0'
-          = image_tag current_user.avatar, class: 'size-full rounded-full object-cover'
+          = attachment_image_tag current_user.avatar, class: 'size-full rounded-full object-cover'
         ul class='mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52' tabindex='0'
           li
             a Profile

@@ -2,16 +2,19 @@
 #
 # module Users
 #   class Create < ApplicationOperation
-#     attr_reader :params
+#     attr_reader :user
 
-#     def initialize(params)
-#       @params = params
+#     def initialize(user = User.new)
+#       @user = user
 #     end
 
-#     def call
-#       user = User.create!(@params)
+#     def call(params)
+#       ActiveRecord::Base.transaction do
+#         user.assign_attributes(params)
+#         user.save!
 
-#       success(user) # success(user: user, token: '123')
+#         success(user) # success(user: user, token: '123')
+#       end
 #     rescue StandardError => e
 #       failure(e.message)
 #     end
@@ -19,6 +22,7 @@
 # end
 #
 # response = Users::Create.call(email: 'test@example.com', password: 'Password123@')
+# response = Users::Create.new(User.new).call(email: 'test@example.com', password: 'Password123@')
 # response.data
 # response.errors
 # response.success?
@@ -30,7 +34,7 @@ class ApplicationOperation
   include Responseable
 
   def self.call(...)
-    new(...).call
+    new.call(...)
   end
 
   def call
