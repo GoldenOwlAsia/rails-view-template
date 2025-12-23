@@ -1,4 +1,7 @@
-import '../stylesheets/admin/index.scss';
-import '../controllers/admin';
-import '../controllers/shared';
+import '@/stylesheets/admin/index.scss';
+
 import '@hotwired/turbo-rails';
+
+import '@/controllers/shared';
+import '@/controllers/charts';
+import '@/controllers/admin';

@@ -1,5 +1,5 @@
 .alert[role="alert" class="#{alert_type} #{attributes[:class]}" data-controller="alert"]
-  = vite_image_tag("images/icons/#{alert_icon}", class: "")
+  = vite_image_tag("images/icons/#{alert_icon}", class: '')
   span
     = text
   button data-action="click->alert#remove" data-timer=timer type="button" class="-m-3 p-3 focus-visible:outline-offset-[-4px]"

@@ -1,8 +1,8 @@
-require:
-  - rubocop-factory_bot
 plugins:
-  - rubocop-performance
+  - rubocop-factory_bot
+  - rubocop-slim
   - rubocop-rails
+  - rubocop-performance
 
 inherit_mode:
   merge:
@@ -113,7 +113,7 @@ Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
 Layout/LineLength:
-  Max: 160
+  Max: 250
   Exclude:
     - db/migrate/*.rb
     - config/initializers/content_security_policy.rb

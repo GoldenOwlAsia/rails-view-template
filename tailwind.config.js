@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: 'class',
   content: [
@@ -16,11 +17,18 @@ module.exports = {
     'app/views/devise/**/*.html.slim',
     'app/views/layouts/*.{html,html.erb,erb,js,ts,rb,slim,html.slim}',
   ],
-  theme: {
-    extend: {},
+  corePlugins: {
+    aspectRatio: false,
   },
-  plugins: [require('daisyui')],
-  daisyui: {
-    themes: ['light', 'dark'],
+  theme: {
+    screens: {
+      xxs: '320px',
+      xs: '425px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      xxl: '1536px',
+    },
   },
 };

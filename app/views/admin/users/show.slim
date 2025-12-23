@@ -1,0 +1,59 @@
+- provide(:title, 'User Detail')
+
+= render 'admin/shared/breadcrumb', breadcrumbs: [{ name: 'Dashboard', path: admin_root_path }, { name: 'Users', path: admin_users_path }, { name: 'User Detail' }]
+
+.min-h-screen.p-6 data-controller="icons"
+  .max-w-6xl.mx-auto
+    .bg-base-200.border.border-base-200.rounded-3xl.overflow-hidden.mb-8
+      .relative.p-8
+        .flex.flex-col.lg:flex-row.items-start.gap-8
+          .flex-1.text-center.lg:text-left
+            .text-4xl.font-bold.mb-2
+              = display_text(@user.full_name)
+            .mb-4.text-xl.break-words.overflow-wrap-anywhere = @user.email
+
+            .flex.flex-wrap.justify-center.lg:justify-start.gap-3.mb-6
+              - @user.roles.each do |role|
+                span.inline-flex.items-center.px-4.py-2.rounded-full.text-sm.font-semibold class="#{role.name == 'admin' ? 'bg-red-100 text-red-800 border border-red-200' : role.name == 'coach' ? 'bg-blue-100 text-blue-800 border border-blue-200' : 'bg-green-100 text-green-800 border border-green-200'}"
+                  = role.name.titleize
+
+              span.inline-flex.items-center.px-4.py-2.rounded-full.text-sm.font-semibold class="bg-green-100 text-green-800 border border-green-200"
+                = 'Active Account'
+
+          .flex-shrink-0.flex.gap-2
+            = link_to admin_users_path, class: 'inline-flex items-center px-3 py-1 border-2 border-slate-300 rounded-xl shadow-sm text-base font-medium text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-400' do
+              = lucide_icon('arrow-left', class: 'w-5 h-5 mr-2')
+              | Back
+            = link_to edit_admin_user_path(@user), class: 'inline-flex items-center px-3 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-purple-700' do
+              = lucide_icon('edit', class: 'w-5 h-5 mr-2')
+              | Edit
+
+    .bg-white.backdrop-blur-sm.bg-opacity-95.border.border-white.border-opacity-20.rounded-3xl.shadow-xl.shadow-slate-200/50.overflow-hidden data-controller="tabs" data-tabs-active-value="personal"
+      .border-b.border-slate-200.bg-gradient-to-r.from-slate-50.to-slate-100
+        nav.flex.space-x-8.px-8
+          button.py-4.px-2.border-b-2.font-medium.text-sm.transition-all.duration-300.border-indigo-500.text-indigo-600 data-tabs-target="tab" data-tab="personal" data-action="click->tabs#switch"
+            | Personal Information
+
+      .p-8
+        #personal-content
+          .grid.grid-cols-1.md:grid-cols-2.lg:grid-cols-3.gap-6
+            .bg-gradient-to-br.from-blue-50.to-indigo-50.rounded-xl.p-6.border.border-blue-100.hover:shadow-lg.transition-all.duration-300
+              .flex.items-center.mb-4
+                .w-10.h-10.bg-blue-100.rounded-lg.flex.items-center.justify-center.mr-3
+                  = lucide_icon('user', class: 'w-5 h-5 text-blue-600')
+                h3.text-lg.font-semibold.text-blue-800 Full Name
+              p.text-base.font-medium.text-slate-800.break-words.overflow-wrap-anywhere = display_text(@user.full_name)
+
+            .bg-gradient-to-br.from-green-50.to-emerald-50.rounded-xl.p-6.border.border-green-100.hover:shadow-lg.transition-all.duration-300
+              .flex.items-center.mb-4
+                .w-10.h-10.bg-green-100.rounded-lg.flex.items-center.justify-center.mr-3
+                  = lucide_icon('mail', class: 'w-5 h-5 text-green-600')
+                h3.text-lg.font-semibold.text-green-800 Email Address
+              p.text-base.font-medium.text-slate-800.break-words.overflow-wrap-anywhere = display_text(@user.email)
+
+            .bg-gradient-to-br.from-indigo-50.to-blue-50.rounded-xl.p-6.border.border-indigo-100.hover:shadow-lg.transition-all.duration-300
+              .flex.items-center.mb-4
+                .w-10.h-10.bg-indigo-100.rounded-lg.flex.items-center.justify-center.mr-3
+                  = lucide_icon('calendar', class: 'w-5 h-5 text-indigo-600')
+                h3.text-lg.font-semibold.text-indigo-800 Member Since
+              p.text-base.font-medium.text-slate-800 = display_datetime(@user.created_at)

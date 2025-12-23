@@ -1,0 +1,10 @@
+- provide(:title, 'Edit User')
+
+= render 'admin/shared/breadcrumb', breadcrumbs: [{ name: 'Dashboard', path: admin_root_path }, { name: 'Users', path: admin_users_path }, { name: 'Edit' }]
+
+.max-w-4xl.mx-auto.px-4.py-8
+  .bg-white.shadow-md.rounded-lg.p-6
+    h2.text-2xl.font-bold.mb-6 Edit User
+
+    = simple_form_for @user, url: admin_user_path(@user), method: :put, data: { turbo: false } do |f|
+      == render 'form', f: f

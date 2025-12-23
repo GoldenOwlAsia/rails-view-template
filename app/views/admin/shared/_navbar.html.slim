@@ -1,0 +1,26 @@
+div class='bg-white border-b border-gray-200 sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]'
+  .navbar.w-full.px-4
+    .flex.items-center
+      a.btn.btn-ghost.px-0[href=root_path aria-current='page' aria-label='Homepage']
+        = vite_image_tag('images/icons/logo.svg', class: 'size-6')
+      div class='uppercase font-title inline-flex text-lg md:text-2xl'
+        span
+          | Daisy
+        span class='text-[#1AD1A5]'
+          | UI
+
+    div class='flex flex-1'
+
+    .flex.items-center.gap-8
+      = lucide_icon('bell', class: 'size-6')
+
+      .dropdown.dropdown-end
+        div class='bg-gray-800 size-10 rounded-full' tabindex='0'
+          = attachment_image_tag current_user.avatar, class: 'size-full rounded-full object-cover'
+        ul class='mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52' tabindex='0'
+          li
+            a Profile
+          li
+            a Settings
+          li
+            = button_to 'Log out', destroy_user_session_path, method: :delete, data: { turbo: false }

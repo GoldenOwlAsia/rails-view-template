@@ -6,19 +6,17 @@ commit-msg:
 pre-commit:
   parallel: true
   commands:
-    zeitwerk_check:
+    zeitwerk:
       run: bundle exec rails zeitwerk:check
-    eslint_check:
-      glob: '*.js'
-      run: yarn run eslint {staged_files}
-    rubocop_check:
-      glob: '*.rb'
+    rubocop:
+      tags: backend style
+      glob: '{*.{rb,rake,slim},[A-Z]*file}'
       run: bundle exec rubocop --force-exclusion {staged_files}
-# TODO: If you want to check rspec or bundle-audit before pushing, add them here:
-# pre-push:
-#   1_rspec:
-#     skip_empty: false
-#     run: bundle exec rspec
-#   2_bundle-audit:
-#     skip_empty: false
-#     run: bundle exec bundle-audit check
+    secrets-detection:
+      tags: secrets
+      files: git diff --name-only --diff-filter=d --staged
+      run: 'if command -v gitleaks > /dev/null 2>&1; then gitleaks protect --no-banner --staged --redact --verbose; else echo "WARNING: gitleaks is not installed. Please install it. See https://github.com/zricethezav/gitleaks#installing."; fi'
+    eslint:
+      tags: frontend style
+      glob: '*.{js}'
+      run: yarn lint {staged_files}

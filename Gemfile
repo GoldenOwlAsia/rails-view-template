@@ -1,42 +1,46 @@
-# frozen_string_literal: true
-
 source 'https://rubygems.org'
 
-gem 'bootsnap', require: false
-gem 'good_migrations'
-gem 'pg', '~> 1.5'
+ruby '3.4.7'
+
+gem 'rails', '~> 8.1.1'
+
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 7.2.0'
-gem 'redis', '>= 4.0.1'
-gem 'stimulus-rails'
-gem 'turbo-rails'
+gem 'bootsnap', require: false
 gem 'tzinfo-data', platforms: %i[windows jruby]
-gem 'vite_rails', '~> 3.0'
-gem 'image_processing'
-gem 'enumerize'
+
+# Database
+gem 'pg'
+gem 'good_migrations'
 
 # Auth
 gem 'devise'
+gem 'pundit'
 gem 'rolify'
+gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
-# Policy
-gem 'pundit', '~> 2.4'
+# File
+gem 'ruby-vips'
+gem 'image_processing', '~> 1.2'
 gem 'active_storage_validations'
 
 # Job
+gem 'redis'
 gem 'sidekiq'
-gem 'sidekiq-unique-jobs'
 gem 'sidekiq-scheduler'
-
-# Seed
-gem 'seedbank'
-gem 'faker'
+gem 'sidekiq-unique-jobs'
 
 # Front-end
-gem 'slim-rails', '~> 3.6', '>= 3.6.3'
+gem 'slim-rails'
+gem 'vite_rails'
+gem 'turbo-rails'
+gem 'stimulus-rails'
+
+# Forms
 gem 'simple_form'
+gem 'simple_form-tailwind'
 
 # Pagination
 gem 'pagy'
@@ -46,38 +50,51 @@ gem 'stackprof'
 gem 'sentry-ruby'
 gem 'sentry-rails'
 
+# Seed
+gem 'faker'
+gem 'seedbank'
+
+# Search
+gem 'ransack'
+
+# Others
+gem 'enumerize'
 gem 'web-console'
 
 group :development, :test do
-  gem 'brakeman', require: false
-  gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
+  gem 'rspec-rails'
   gem 'dotenv', '>= 3.0'
   gem 'factory_bot_rails'
-  gem 'rspec-rails'
+  gem 'brakeman', require: false
+  gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
 end
 
 group :development do
-  gem 'annotate'
-  gem 'bundler-audit', require: false
+  gem 'pry'
+  gem 'bullet'
   gem 'lefthook'
-  gem 'letter_opener'
+  gem 'annotaterb'
+  gem 'i18n-tasks'
   gem 'pgcli-rails'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
+  gem 'rails-mermaid_erd'
+  gem 'ruby-lsp'
+  gem 'ruby-lsp-rails'
+  gem 'bundler-audit', require: false
   gem 'rubocop', require: false
+  gem 'rubocop-slim', require: false
   gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', '>= 2.22.0', require: false
-  gem 'ruby-lsp'
-  gem 'ruby-lsp-rails'
-  gem 'bullet'
-  gem 'rails-mermaid_erd'
-  gem 'i18n-tasks'
 end
 
 group :test do
-  gem 'capybara'
-  gem 'shoulda-matchers'
   gem 'vcr'
   gem 'webmock'
+  gem 'capybara'
+  gem 'pundit-matchers'
+  gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'rails-controller-testing'
 end

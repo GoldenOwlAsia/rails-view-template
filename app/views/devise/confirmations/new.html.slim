@@ -1,14 +1,14 @@
-h2
+.my-4.text-xl.font-bold.tracking-tight.text-primary
   | Resend confirmation instructions
 = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
   = f.full_error :confirmation_token
-  .form-inputs
+  .flex.flex-col.gap-2
     = f.input :email,
+              label: false,
               required: true,
               autofocus: true,
               value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
-              input_html: { autocomplete: "email" }
-  .form-actions
-    = f.button :submit, "Resend confirmation instructions"
-= render "devise/shared/links"
+              input_html: { autocomplete: 'email', class: 'w-full' }
+  .flex.justify-center
+    = f.button :submit, 'Resend confirmation instructions', class: 'w-full'
+= render 'devise/shared/links'

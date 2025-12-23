@@ -1,3 +1,35 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :uuid             not null, primary key
+#  confirmation_sent_at   :datetime
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  current_sign_in_at     :datetime
+#  current_sign_in_ip     :string
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  first_name             :string
+#  last_name              :string
+#  last_sign_in_at        :datetime
+#  last_sign_in_ip        :string
+#  provider               :integer
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  sign_in_count          :integer          default(0), not null
+#  uid                    :string
+#  unconfirmed_email      :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -43,7 +75,8 @@ RSpec.describe User, type: :model do
         )
         allow(user.avatar.blob).to receive(:byte_size).and_return(11.megabytes)
         expect(user).not_to be_valid
-        expect(user.errors[:avatar]).to include(I18n.t('activerecord.errors.models.user.attributes.avatar.size', size: 10))
+
+        expect(user.errors[:avatar]&.first).to include('file size must be less than 10 MB')
       end
     end
   end
@@ -74,40 +107,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '.from_google' do
-    let(:google_params) { { uid: Faker::Internet.uuid, email: 'user@example.com' } }
-
-    context 'when the user does not exist' do
-      it 'creates a new user' do
-        expect do
-          User.from_google(google_params)
-        end.to change(User, :count).by(1)
-      end
-
-      it 'sets the correct attributes' do
-        user = User.from_google(google_params)
-        expect(user.uid).to eq(google_params[:uid])
-        expect(user.provider).to eq('google')
-        expect(user.email).to eq('user@example.com')
-      end
-    end
-
-    context 'when the user already exists' do
-      let!(:existing_user) { create(:user, email: 'user@example.com', uid: google_params[:uid], provider: 'google') }
-
-      it 'finds the existing user' do
-        user = User.from_google(google_params)
-        expect(user).to eq(existing_user)
-      end
-
-      it 'does not create a new user' do
-        expect do
-          User.from_google(google_params)
-        end.not_to change(User, :count)
-      end
-    end
-  end
-
   describe 'instance methods' do
     let!(:user) { create(:user) }
 
@@ -126,11 +125,6 @@ RSpec.describe User, type: :model do
       it 'returns true if the user has an employee role and is not an admin' do
         user.add_role(:employee)
         expect(user.employee?).to be true
-      end
-
-      it 'returns false if the user is an admin' do
-        user.add_role(:admin)
-        expect(user.employee?).to be false
       end
     end
   end

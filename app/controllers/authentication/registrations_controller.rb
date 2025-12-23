@@ -5,7 +5,7 @@ module Authentication
     protected
 
     def after_update_path_for(_resource)
-      sign_in_after_change_password? ? edit_user_registration_path : new_session_path(resource_name)
+      sign_in_after_change_password? ? edit_user_users_sign_up_path : new_session_path(resource_name)
     end
 
     def configure_permitted_parameters

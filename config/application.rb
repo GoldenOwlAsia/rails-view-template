@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'boot'
 
 require 'rails'
@@ -26,7 +24,7 @@ module RailsBoilerplate
     config.javascript_path = 'frontend'
 
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.2
+    config.load_defaults 8.1
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -56,5 +54,8 @@ module RailsBoilerplate
     # Enable web console in browser - protected by devise
     config.web_console.development_only = false
     config.web_console.permissions = '0.0.0.0/0'
+
+    # Allow ngrok to be used in development
+    config.hosts << /[a-z0-9-]+\.ngrok-free\.app/
   end
 end
