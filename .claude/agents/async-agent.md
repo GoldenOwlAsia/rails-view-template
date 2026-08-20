@@ -1,5 +1,5 @@
 ---
-name: job-agent
+name: async-agent
 description: Implements Sidekiq background jobs in app/jobs and ActionMailer classes with their Slim views in app/mailers. Write-capable. Use when a plan calls for asynchronous/scheduled work or a new or changed transactional email.
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet

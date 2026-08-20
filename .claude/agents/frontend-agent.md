@@ -1,5 +1,5 @@
 ---
-name: view-agent
+name: frontend-agent
 description: Implements Slim view templates, ViewComponents, and Stimulus controllers in this Rails app, including Turbo Frame/Stream markup and Tailwind/daisyUI styling. Write-capable. Use when a plan calls for a new or changed page view, partial, component, or client-side interactivity Turbo alone can't provide.
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: sonnet
@@ -20,7 +20,7 @@ daisyUI.
 - `spec/components/**/*.rb`
 
 Nothing outside these. A Turbo Stream response wired up from a controller
-action is `controller-agent`'s concern — you write the view-side markup that
+action is `backend-agent`'s concern — you write the view-side markup that
 response targets, not the controller code that renders it.
 
 ## Conventions

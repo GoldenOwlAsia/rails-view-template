@@ -35,14 +35,15 @@ reads to queries, then render.
 
 Every layer above also has a write-capable agent under `.claude/agents/` that
 already knows its rule file and this repo's hard constraints — each agent
-covers a small cluster of adjacent layers rather than one layer each:
-`model-agent` (models, validators, migrations), `operation-agent`
-(operations, queries), `controller-agent` (controllers, permit_params),
-`policy-agent`, `view-agent` (views, ViewComponents, Stimulus), `job-agent`
-(jobs, mailers), `rspec-agent`. Dispatch them for a feature large enough to
-benefit from per-layer isolation — see the `implement-feature` skill for the
-order. Read-only review agents (`rails-architect`, `database-reviewer`,
-`security-reviewer`, `bug-investigator`) are separate and never edit files.
+covers a whole cluster of adjacent layers rather than one layer each:
+`backend-agent` (models, validators, migrations, policies, operations,
+queries, permit_params, controllers), `frontend-agent` (views,
+ViewComponents, Stimulus), `async-agent` (jobs, mailers), `rspec-agent`.
+Dispatch them for a feature large enough to benefit from isolating backend
+from frontend from tests — see the `implement-feature` skill for the order.
+`reviewer-agent` (read-only, covering architecture fit, database, and
+security) and `bug-investigator` (read-only, root-cause tracing) are
+separate and never edit files.
 
 ## Environment
 
