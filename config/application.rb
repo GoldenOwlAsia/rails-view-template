@@ -47,15 +47,13 @@ module RailsBoilerplate
       protocol: ENV.fetch('APP_PROTOCOL', 'http')
     }
 
+    config.view_component.preview_paths = [Rails.root.join('spec/components/previews').to_s]
+    config.view_component.default_preview_layout = 'component_preview'
+
     config.i18n.default_locale = :en
     config.i18n.load_path += Rails.root.glob('config/locales/**/*.{rb, yml}')
     config.i18n.fallbacks = [I18n.default_locale]
 
-    # Enable web console in browser - protected by devise
-    config.web_console.development_only = false
-    config.web_console.permissions = '0.0.0.0/0'
-
-    # Allow ngrok to be used in development
-    config.hosts << /[a-z0-9-]+\.ngrok-free\.app/
+    # web_console keeps Rails defaults: development-only, localhost permissions.
   end
 end

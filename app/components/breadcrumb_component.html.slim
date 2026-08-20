@@ -1,0 +1,14 @@
+nav.my-4 class="flex" aria-label="Breadcrumb"
+  ol class="flex items-center gap-2"
+    - entries.each_with_index do |crumb, index|
+      - unless index.zero?
+        div class="flex items-center"
+          = lucide_icon('chevron-right', class: 'size-4')
+
+      li class="inline-flex items-center" aria-current=(crumb.current ? 'page' : nil)
+        - if crumb.link?
+          a href=crumb.path class="inline-flex items-center text-xs text-grey-300 font-normal hover:text-primary" data-turbo-frame="_top"
+            = crumb.name
+        - else
+          span class="text-xs font-medium text-dark"
+            = crumb.name

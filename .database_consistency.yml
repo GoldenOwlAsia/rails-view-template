@@ -1,0 +1,10 @@
+# Devise builds confirmation and reset-password tokens with
+# Devise.friendly_token, so they are unique by construction. A model-level
+# uniqueness validator would add a SELECT on every save and guard nothing.
+User:
+  index_users_on_confirmation_token:
+    UniqueIndexChecker:
+      enabled: false
+  index_users_on_reset_password_token:
+    UniqueIndexChecker:
+      enabled: false

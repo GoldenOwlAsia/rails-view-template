@@ -1,0 +1,12 @@
+/ Layout for ViewComponent previews (Lookbook).
+/
+/ Deliberately not the application layout: that one renders layouts/_header,
+/ which reads current_user.avatar, and a preview has nobody signed in. This
+/ pulls in the same head — so Vite assets, Tailwind and the theme all apply —
+/ and nothing else.
+doctype html
+html[lang="en"]
+  head
+    = render 'layouts/head'
+  body.p-8 data-controller="icons theme"
+    = yield

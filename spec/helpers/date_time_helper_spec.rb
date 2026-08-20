@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DateTimeHelper, type: :helper do
+RSpec.describe DateTimeHelper do
   describe '#display_date' do
     let(:datetime) { Date.new(2024, 11, 9) }
 

@@ -221,6 +221,6 @@ module Crudable
   end
 
   def pagy_limit
-    Pagy.options[:limit] || 10
+    Pagy::OPTIONS[:limit] || 10
   end
 end

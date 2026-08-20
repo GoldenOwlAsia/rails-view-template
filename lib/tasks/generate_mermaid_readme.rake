@@ -1,10 +1,16 @@
+require 'English'
+
 namespace :docs do
   desc "Generate project directory structure in YAML format and update README.md"
   task generate_yaml: :environment do
     ignored_folders = %w[node_modules log tmp public storage vendor .git .idea .vscode .github]
     tree_command = "tree -L 2 -I \"#{ignored_folders.join('|')}\" --noreport"
 
+    abort('❌ `tree` is not installed. Run `brew install tree` first.') unless system('command -v tree > /dev/null 2>&1')
+
     output = `#{tree_command}`
+    abort("❌ `tree` failed with status #{$CHILD_STATUS.exitstatus}.") unless $CHILD_STATUS.success?
+    abort('❌ `tree` produced no output; refusing to overwrite the README section.') if output.strip.empty?
 
     yaml_output = YAML.dump(output).strip
 

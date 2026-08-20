@@ -5,6 +5,7 @@ module.exports = {
   darkMode: 'class',
   content: [
     'app/helpers/**/*.rb',
+    'app/components/**/*.{rb,slim,html.slim,erb,html.erb}',
     'app/views/**/*.{html,html.erb,erb,js,ts,rb,slim,html.slim}',
     'app/frontend/**/*.{js,jsx,ts,tsx,vue}',
     'app/frontend/**/**/*.{js,jsx,ts,tsx,vue}',

@@ -77,6 +77,10 @@ Rails.application.configure do
   # Store files locally.
   config.active_storage.service = :local
 
+  # Enable web console on staging only; production never sets this.
+  config.web_console.development_only = false
+  config.web_console.permissions = '0.0.0.0/0'
+
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com
