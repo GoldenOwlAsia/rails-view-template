@@ -34,19 +34,31 @@ permit_params → controller → view → Stimulus.
 
 Follow `.claude/rules/` for each layer — they load as you open the files. For a
 feature that touches several layers, each step above has a matching
-write-capable agent (`migration-agent`, `model-agent`, `policy-agent`,
-`operation-agent`/`query-agent`, `permit-params-agent`, `controller-agent`,
-`viewcomponent-agent`/`view-agent`, `stimulus-agent`, `mailer-agent`,
-`rspec-agent`) that already knows that layer's rule file and hard constraints
-— dispatch them in the order above instead of writing every layer inline
-yourself when the feature is large enough to benefit from the isolation. For a
-small, single-file change, just write it directly.
+write-capable agent that already knows that layer's rule file and hard
+constraints — dispatch them in the order above instead of writing every layer
+inline yourself when the feature is large enough to benefit from the
+isolation. For a small, single-file change, just write it directly.
+
+- `model-agent` — models, validators, and their migrations
+- `policy-agent` — Pundit policies
+- `operation-agent` — operations and queries
+- `controller-agent` — controllers and permit_params
+- `view-agent` — views, ViewComponents, and Stimulus controllers
+- `job-agent` — background jobs and mailers
+- `rspec-agent` — standalone spec work not already covered by the above
 
 ## Phase 4 — Verify
 
 Run the commands from `CLAUDE.md`'s Workflow section that apply to what
 changed, and paste real output for each — never claim one passed without
 running it.
+
+If `model-agent` touched anything beyond a trivial column add, dispatch
+`database-reviewer` now — don't rely on that agent's own self-report as the
+only check, even when it says its own verification passed. Same for
+`security-reviewer` when the feature touches auth, admin, uploads, or
+permissions: dispatch it rather than trusting `policy-agent`'s or
+`controller-agent`'s self-report alone.
 
 ## Phase 5 — Review your own diff
 

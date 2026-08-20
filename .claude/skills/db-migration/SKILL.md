@@ -14,35 +14,28 @@ Schema change requested: $ARGUMENTS
 
 ## Phase 2 — Check each hazard
 
-Lock, index, constraint, backfill, rollback, deploy order — the full checklist
-lives in `.claude/rules/migrations.md` (auto-loaded once you touch a migration
-file) and is maintained there, not repeated here. For anything beyond a trivial
-column add, dispatch the `database-reviewer` agent (read-only) to audit the
-planned change against that checklist before you write it — it stays current
-independently of this skill and catches model/schema mismatches this phase
-would otherwise miss.
+Lock, index, constraint, backfill, rollback, deploy order, and the squash-mode-
+vs-deployed-mode workflow — the full checklist lives in
+`.claude/rules/models-and-migrations.md` (auto-loaded once you touch a
+migration file) and is maintained there, not repeated here. For anything
+beyond a trivial column add, dispatch the `database-reviewer` agent
+(read-only) to audit the planned change against that checklist before you
+write it — it stays current independently of this skill and catches
+model/schema mismatches this phase would otherwise miss.
 
 ## Phase 3 — Write it
 
-For an isolated schema change, dispatch the write-capable `migration-agent`
-instead of writing it inline — it carries the same squash-mode-vs-deployed-mode
-logic below and the same verification list as Phase 4. Write it directly
-yourself when the change is part of a larger feature you're already building.
-
-This template squashes migration history into the original `create_table`
-migrations rather than appending new ones, because it ships no production data.
-Edit the original migration, then regenerate the schema from scratch:
-
-```sh
-rm db/schema.rb && RAILS_ENV=test bin/rails db:drop db:create db:migrate
-```
-
-For a deployed application the opposite holds — add a new migration and never
-touch a deployed one. Say which mode you are in.
+For an isolated schema change, dispatch the write-capable `model-agent`
+(it owns both models and migrations) instead of writing it inline — it
+already knows the squash-mode-vs-deployed-mode workflow from
+`.claude/rules/models-and-migrations.md` and the verification list for
+Phase 4. Write it directly yourself when the change is part of a larger
+feature you're already building — say explicitly which mode applies before
+touching a migration file.
 
 ## Phase 4 — Verify
 
-Run the "Verify" commands in `.claude/rules/migrations.md` and paste the real
-output — never claim one passed without running it.
+Run the "Verify" commands in `.claude/rules/models-and-migrations.md` and
+paste the real output — never claim one passed without running it.
 
 Report the change, the hazards you ruled out, and the commands you ran.
