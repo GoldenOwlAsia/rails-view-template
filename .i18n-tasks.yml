@@ -1,0 +1,25 @@
+# i18n-tasks finds missing and unused translations: https://github.com/glebm/i18n-tasks
+base_locale: en
+
+data:
+  read:
+    - config/locales/%{locale}.yml
+    - config/locales/devise.%{locale}.yml
+    - config/locales/simple_form.%{locale}.yml
+  write:
+    - config/locales/%{locale}.yml
+
+search:
+  paths:
+    - app/
+  exclude:
+    - app/frontend/**/*
+    - app/assets/**/*
+
+ignore_unused:
+  # Looked up internally by Devise's and SimpleForm's own views/mailers/failure
+  # app, not through a literal `t(...)` call this app makes, so the static
+  # scanner cannot see those usages.
+  - 'devise.*'
+  - 'simple_form.*'
+  - 'activerecord.*'

@@ -69,6 +69,9 @@ jobs:
       - name: Lint JavaScript files with eslint
         run: yarn lint
 
+      - name: Check for missing and unused translations
+        run: bundle exec i18n-tasks health
+
   test:
     runs-on: ubuntu-latest
 
