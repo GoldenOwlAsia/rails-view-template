@@ -4,10 +4,10 @@
 # markup, which is why this is a component rather than a partial plus a helper.
 class FlashComponent < ApplicationComponent
   COLORS = {
-    notice: 'bg-blue-200 text-blue-500 white:bg-blue-800 white:text-blue-200',
-    alert: 'bg-red-200 text-red-500 white:bg-red-800 white:text-red-200',
-    success: 'bg-green-200 text-green-500 white:bg-green-800 white:text-green-200',
-    error: 'bg-red-200 text-red-500 white:bg-red-800 white:text-red-200'
+    notice: 'bg-blue-200 text-blue-500 dark:bg-blue-800 dark:text-blue-200',
+    alert: 'bg-red-200 text-red-500 dark:bg-red-800 dark:text-red-200',
+    success: 'bg-green-200 text-green-500 dark:bg-green-800 dark:text-green-200',
+    error: 'bg-red-200 text-red-500 dark:bg-red-800 dark:text-red-200'
   }.freeze
 
   ICONS = {
@@ -16,7 +16,7 @@ class FlashComponent < ApplicationComponent
     error: 'circle-x'
   }.freeze
 
-  DEFAULT_COLOR = 'bg-gray-200 text-gray-500 white:bg-gray-800 white:text-gray-200'.freeze
+  DEFAULT_COLOR = 'bg-gray-200 text-gray-500 dark:bg-gray-800 dark:text-gray-200'.freeze
   DEFAULT_ICON = 'info'.freeze
 
   def initialize(type:, message:)

@@ -49,7 +49,7 @@ ActiveRecord::Schema[8.1].define(version: 2024_10_04_100359) do
     t.uuid "resource_id"
     t.string "resource_type"
     t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true, nulls_not_distinct: true
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
