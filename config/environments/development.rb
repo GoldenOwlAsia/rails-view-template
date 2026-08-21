@@ -77,12 +77,12 @@ Rails.application.configure do
   # config.hosts here, so appending only widens the development allow-list.
   config.hosts << /[a-z0-9-]+\.ngrok-free\.app/
 
-  # Lookbook keeps its own preview_paths and does not inherit
-  # config.view_component.preview_paths; without this it looks in the default
-  # test/components/previews and finds nothing. Set here because the gem is in
-  # the :development group, so config.lookbook exists nowhere else.
-  config.lookbook.preview_paths = config.view_component.preview_paths
-  config.lookbook.preview_layout = config.view_component.default_preview_layout
+  # Lookbook keeps its own preview_paths and does not inherit ViewComponent's;
+  # without this it looks in the default test/components/previews and finds
+  # nothing. Set here because the gem is in the :development group, so
+  # config.lookbook exists nowhere else.
+  config.lookbook.preview_paths = config.view_component.previews.paths
+  config.lookbook.preview_layout = config.view_component.previews.default_layout
 
   # Bullet enable
   config.after_initialize do
