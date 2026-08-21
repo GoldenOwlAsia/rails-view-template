@@ -33,6 +33,14 @@ no `app/services` and you must not create one.**
 Controllers orchestrate. They authorize, delegate mutations to operations and
 reads to queries, then render.
 
+These boundaries are enforced, not just described: `spec/architecture_spec.rb`
+fails the suite — and CI — on a parallel layer directory, an inline
+`params.permit`, a blanket `rescue StandardError`, mail or a job dispatched from
+a model, a query run from a template or component, or a layer class that skips
+its base class. Each example names the rule behind it. If one blocks work you
+believe is right, change the rule and the example together and say so; do not
+quietly weaken the example.
+
 Each layer's conventions live in the `.claude/rules/` file that auto-loads when
 you open a matching file. Write the code yourself, following those — there are
 no write-capable agents here, deliberately: an agent that edits files is an
@@ -43,6 +51,15 @@ The two agents under `.claude/agents/` are both read-only, and exist for
 context isolation rather than knowledge: `reviewer-agent` (architecture fit,
 database, security — fresh eyes on finished work) and `bug-investigator`
 (root-cause tracing across many files). Neither edits anything.
+
+`.claude/skills/` holds the workflows, picked by the model from the prompt or
+invoked by name. `implement-feature` is the multi-layer one;
+`create-migration`, `create-controller` and `create-component` are the
+single-layer entry points, `accessibility-review` is a read-only audit of the
+views and components, and `upgrade-dependencies` plus `repo-consistency-audit`
+are the periodic maintenance pair. Their descriptions are deliberately disjoint — a skill that
+overlaps another's trigger makes the choice between them arbitrary, so a new
+one has to state what it is *not* for as much as what it is.
 
 ## Environment
 
@@ -66,7 +83,8 @@ After editing, run what the change touched and say which commands you ran:
 
 - `bin/rspec <paths>` — targeted specs first
 - `bundle exec rubocop <files>` — changed Ruby (and `.slim`, via rubocop-slim)
-- `bundle exec slim-lint app/views` — changed templates
+- `bundle exec slim-lint app/views app/components` — changed templates (both
+  directories, matching CI)
 - `yarn lint` — changed `app/frontend`
 - `bin/rails zeitwerk:check` — files/constants added, moved, or renamed
 - `bundle exec database_consistency` — schema or model validation changes

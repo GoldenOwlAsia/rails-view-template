@@ -1,6 +1,6 @@
 ---
 name: implement-feature
-description: Build a feature in this Rails app by first finding an analogous existing implementation, then placing each piece in the layer that already exists for it. Covers schema and migration work under strong_migrations. Use when adding new functionality, or when changing a schema, index, constraint or column.
+description: Build a feature that spans several layers of this Rails app by first finding an analogous existing implementation, then placing each piece in the layer that already exists for it. Use when new functionality needs more than one layer — model plus operation or query, policy, controller, view. A lone migration, controller or component has its own skill.
 ---
 
 Implement: $ARGUMENTS
@@ -43,8 +43,9 @@ enforced in the database, a controller inlining logic an operation should own).
 
 ### If the work changes the schema
 
-This is the first step of the backend order above, and it applies whether
-the migration is part of a feature or is the whole task.
+This is the first step of the backend order above. Stay here rather than
+switching to `create-migration` — that skill is for a migration with no feature
+around it, and the steps below are the same ones it follows.
 
 1. Read `db/schema.rb` for the tables involved, then the models — existing
    validations, associations, and the indexes already on the table.

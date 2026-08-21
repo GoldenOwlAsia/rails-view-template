@@ -43,6 +43,16 @@ Two things bite here:
 behaviour needs a real driver, which this project has not set up yet — say so
 rather than writing a spec that silently asserts nothing.
 
+## Architecture
+
+`spec/architecture_spec.rb` is not an ordinary spec: it asserts on the shape of
+the codebase — which layer directories may exist, which base class each layer
+inherits, and the boundary violations that are greppable. It is the enforcement
+half of `.claude/rules/rails-architecture.md`. Treat a failure there as a design
+question, not a test to silence, and keep every example paired with the rule it
+cites. `RSpec/DescribeClass` is excluded for that file alone, in `.rubocop.yml`,
+because it has no single class under test.
+
 ## Policies
 
 Authorization deserves explicit specs. A hidden UI element is not access
