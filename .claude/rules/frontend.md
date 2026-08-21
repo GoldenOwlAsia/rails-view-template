@@ -22,6 +22,17 @@ paths:
   is registered in `spec/supports/view_component.rb`, so do not pass `type:`.
 - Tailwind scans `app/components/**` (see `tailwind.config.js`); a class used only
   in a component and not covered by that glob gets purged from the build.
+- Previews live in `spec/components/previews`, registered in
+  `config/application.rb` through `config.view_component.previews.paths` and
+  `.previews.default_layout` — Rails 8.1's names for what used to be
+  `preview_paths` / `default_preview_layout`. `development.rb` copies both into
+  Lookbook, which keeps its own settings and inherits neither.
+- The preview layout is `layouts/component_preview`, and it attaches only the
+  `icons` Stimulus controller. It deliberately skips the application layout's
+  header, so the `theme` controller is unavailable there — its checkbox target
+  lives in that header, and connecting it without one raises "Missing target
+  element". A component that needs the theme toggle cannot be exercised from a
+  preview as it stands.
 
 Reach for a component when markup has variants or is worth testing on its own. A
 one-off page stays an ordinary view.
@@ -40,6 +51,10 @@ one-off page stays an ordinary view.
   `vite_stylesheet_tag`. A missing entrypoint raises rather than degrading.
 - Tailwind with daisyUI. Reuse existing component classes before adding new
   utility soup.
+- Dark mode is the `dark:` variant. `white:` is not a Tailwind variant — the
+  class is dropped silently at build time, so the markup reads as styled and
+  renders as nothing. `FlashComponent` carried that typo for a while; check any
+  variant prefix you have not seen elsewhere in the repo.
 
 ## Stimulus (`app/frontend`)
 

@@ -47,7 +47,7 @@ This is the first step of the backend order above, and it applies whether
 the migration is part of a feature or is the whole task.
 
 1. Read `db/schema.rb` for the tables involved, then the models — existing
-   validations, associations, `implicit_order_column`.
+   validations, associations, and the indexes already on the table.
 2. Decide what the database must enforce versus what the model merely
    asserts. A uniqueness validation with no unique index behind it is a
    race, not a guarantee.

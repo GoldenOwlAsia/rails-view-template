@@ -22,7 +22,10 @@ Cover the layers that hide causes in this codebase:
 - `ApplicationController` / `Admin::BaseController` filters and rescues
 - `app/operations` — `Responseable` failure branches that swallow the real error
 - `app/queries`, `app/presenters`
-- models: validations, callbacks, rolify roles, `implicit_order_column`
+- models: validations, callbacks, rolify roles, enumerize values, and result
+  order — no model sets `implicit_order_column` and the primary keys are random
+  UUIDs, so an unordered scope is genuinely nondeterministic rather than
+  "wrong sometimes"
 - `app/policies` — a `policy_scope` returning fewer rows looks like data loss
 - `app/jobs` — Sidekiq retries, uniqueness locks, scheduler entries
 - views (Slim) and `app/frontend` Stimulus controllers, plus Turbo frame and

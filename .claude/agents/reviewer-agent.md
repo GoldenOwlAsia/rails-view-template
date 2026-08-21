@@ -61,8 +61,12 @@ no edits.
 - a `belongs_to` with no foreign key constraint
 - a column the code treats as required but the schema leaves nullable
 - missing index on an association used for lookup
-- UUID primary key without `self.implicit_order_column = :created_at`,
-  which makes `first`, `last`, and pagination order arbitrary
+- a paginated, `first` or `last` query with no explicit `.order(...)` —
+  primary keys are random UUIDv4 and no model sets `implicit_order_column`,
+  so the order is arbitrary and a Pagy page can repeat one row while
+  dropping another
+- a unique index over a nullable column without `nulls_not_distinct: true`,
+  which leaves every `NULL` row unconstrained
 
 `bundle exec database_consistency` mechanizes much of this — run it, then
 judge each result. Some are genuine, some are wrong for this stack (Devise
