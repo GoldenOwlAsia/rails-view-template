@@ -92,6 +92,9 @@ Never claim something passes without having run it and seen the output.
   Describe what changed and let them commit. Do not look for a way around it.
 - Reading history and staging are fine: `git status`, `git diff`, `git log`,
   `git show`, `git add`.
+- Commands that discard uncommitted work are blocked too: `reset --hard`,
+  `clean -f`, `checkout -- <path>`, `restore <path>`. Stash instead, or ask.
+  Switching branches is fine.
 - Keep unrelated changes out of the diff.
 - Never edit a migration that is already deployed — except in this template,
   where migration history is intentionally squashed into the original files.

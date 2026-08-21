@@ -102,4 +102,19 @@ if printf '%s' "$cmd" | grep -qE 'git[^|;&]*clean[^|;&]*-[a-z]*f'; then
   deny "Refusing to run git clean -f: it deletes untracked files. Ask the user first."
 fi
 
+# `git checkout -- <path>`, `git checkout .` and `git restore <path>` throw away
+# working-tree changes exactly like reset --hard does. Switching branches
+# (`git checkout develop`, `git checkout -b x`) is left alone: telling a branch
+# name from a path needs the ref list, which a regex does not have.
+if printf '%s' "$cmd" | grep -qE "${git_subcommand}checkout[[:space:]]+(-[^[:space:]]+[[:space:]]+)*(--[[:space:]]|\.([[:space:]]|$))"; then
+  deny "Refusing to run git checkout on a path: it discards uncommitted changes in those files. Stash first, or ask the user."
+fi
+if printf '%s' "$cmd" | grep -qE "${git_subcommand}restore\b"; then
+  # --staged on its own only unstages; the content stays in the working tree.
+  if ! { printf '%s' "$cmd" | grep -qE '\-\-staged\b' &&
+    ! printf '%s' "$cmd" | grep -qE '\-\-worktree\b'; }; then
+    deny "Refusing to run git restore on the working tree: it discards uncommitted changes. Stash first, or ask the user. (git restore --staged, which only unstages, is allowed.)"
+  fi
+fi
+
 exit 0
