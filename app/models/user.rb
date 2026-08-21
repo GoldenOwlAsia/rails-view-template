@@ -32,10 +32,6 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  # The primary key is a UUID, so ordering by it is arbitrary rather than
-  # chronological. first/last/pagination need a real time column.
-  self.implicit_order_column = :created_at
-
   rolify
 
   extend Enumerize
