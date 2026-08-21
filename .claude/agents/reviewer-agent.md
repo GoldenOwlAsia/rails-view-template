@@ -141,3 +141,9 @@ results you consider false positives for this stack, and why.
 
 For Architecture output, use the ordered plan shape described above rather
 than the finding-per-line format.
+
+Report real defects only. Skip anything RuboCop, slim-lint or ESLint already
+enforce — they run in CI, and a review that spends its length on style buries
+the finding that mattered. If you cannot describe how something fails, with the
+input or sequence that triggers it, it is a question rather than a finding;
+label it as one.

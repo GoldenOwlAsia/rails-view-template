@@ -43,6 +43,23 @@ one-off page stays an ordinary view.
 
 ## Stimulus (`app/frontend`)
 
+- **Controllers register themselves.** Each namespace directory
+  (`controllers/shared`, `admin`, `charts`, `application`) has an `index.js`
+  that globs its own directory:
+
+  ```js
+  setupStimulus(import.meta.glob('./**/*_controller.js', { eager: true }));
+  ```
+
+  Name a file `<name>_controller.js`, drop it in the right namespace, and it is
+  picked up — there is no `application.register(...)` call to add, and editing
+  `index.js` is not part of adding a controller. Only touch an `index.js` when
+  introducing a brand-new namespace directory, and then wire that namespace into
+  the entrypoints that need it (`entrypoints/application.js` loads `shared` +
+  `application`; `entrypoints/admin.js` loads `shared` + `charts` + `admin`).
+- `shared` is for controllers used by both admin and public layouts; put
+  admin-only ones in `admin`, chart ones in `charts`, public-only ones in
+  `application`.
 - Stimulus is the client-side tool here. Do not reach for React or Vue for a
   piece of interactive UI.
 - Prefer Turbo (frames, streams, plain form submissions) over JavaScript. Add a

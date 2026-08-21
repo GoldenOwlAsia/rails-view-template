@@ -73,6 +73,13 @@ whether an operation plus a model validation, or a presenter plus a component,
 already covers the case. If you still need one, say explicitly that you are
 introducing a new layer — do not do it quietly.
 
+`app/permit_params` is the one that gets mistaken for a form layer, because it
+is the only place a field list lives outside a model. It is not one. A
+`<Resource>Params` class has no superclass, no validations, no `save`, no
+coercion, and no branching on the actor — a permitted-attributes list is static
+per resource. `app/permit_params/user_params.rb` is the whole pattern; read it
+rather than elaborating on it.
+
 ## Two places the seminar deck will mislead you
 
 The slides are a good map of the patterns, but two of their examples contradict

@@ -33,17 +33,16 @@ no `app/services` and you must not create one.**
 Controllers orchestrate. They authorize, delegate mutations to operations and
 reads to queries, then render.
 
-Every layer above also has a write-capable agent under `.claude/agents/` that
-already knows its rule file and this repo's hard constraints — each agent
-covers a whole cluster of adjacent layers rather than one layer each:
-`backend-agent` (models, validators, migrations, policies, operations,
-queries, permit_params, controllers), `frontend-agent` (views,
-ViewComponents, Stimulus), `async-agent` (jobs, mailers), `rspec-agent`.
-Dispatch them for a feature large enough to benefit from isolating backend
-from frontend from tests — see the `implement-feature` skill for the order.
-`reviewer-agent` (read-only, covering architecture fit, database, and
-security) and `bug-investigator` (read-only, root-cause tracing) are
-separate and never edit files.
+Each layer's conventions live in the `.claude/rules/` file that auto-loads when
+you open a matching file. Write the code yourself, following those — there are
+no write-capable agents here, deliberately: an agent that edits files is an
+agent making changes nobody reviewed, and a per-layer agent mostly restates a
+rule file that has already loaded.
+
+The two agents under `.claude/agents/` are both read-only, and exist for
+context isolation rather than knowledge: `reviewer-agent` (architecture fit,
+database, security — fresh eyes on finished work) and `bug-investigator`
+(root-cause tracing across many files). Neither edits anything.
 
 ## Environment
 
@@ -77,10 +76,11 @@ Never claim something passes without having run it and seen the output.
 ## Safety
 
 - Never write to `.env`, `config/master.key`, `config/credentials/*.key`, or any
-  `*.pem` / `*.key`. `.env.sample` is fine.
+  `*.pem` / `*.key`. `.env.sample` is fine. This holds for shell commands too —
+  a redirect or `cp` is the same write.
 - Never run destructive database commands (`db:drop`, `db:reset`,
-  `db:schema:load` on a populated database). The development database in this
-  workspace is not disposable.
+  `db:migrate:reset`, `db:schema:load` on a populated database). The development
+  database in this workspace is not disposable.
 - Never target production: no `RAILS_ENV=production` task runs, no production
   `DATABASE_URL`.
 - Do not add a gem or npm package without a concrete requirement in the task.

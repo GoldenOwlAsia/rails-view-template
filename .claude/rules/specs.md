@@ -21,6 +21,9 @@ pundit-matchers, WebMock, VCR and SimpleCov are already wired up.
   better failure output than splitting assertions across examples.
 - Never weaken or delete a spec to make the suite green. If a spec is wrong,
   say so and explain why before changing it.
+- Never write a spec that would still pass if the feature under test were
+  deleted. No no-op assertions, and no asserting against a stub where the real
+  behaviour is what matters.
 
 ## System specs
 

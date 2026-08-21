@@ -33,10 +33,53 @@ fi
 
 # Destructive database tasks. The development database in this workspace is not
 # disposable; the test database is rebuilt explicitly by the migration workflow.
-if printf '%s' "$cmd" | grep -qE '(rails|rake)[^|;&]*db:(drop|reset|purge)'; then
+if printf '%s' "$cmd" | grep -qE '(rails|rake)[^|;&]*db:(drop|reset|purge|migrate:reset|schema:load)'; then
   if ! printf '%s' "$cmd" | grep -qE 'RAILS_ENV=["'"'"']?test'; then
     deny "Refusing to run a destructive db task outside RAILS_ENV=test. If the test database really needs rebuilding, prefix the command with RAILS_ENV=test; otherwise ask the user first."
   fi
+fi
+
+# Writes to secrets, over the Bash channel.
+#
+# protect-files.sh only sees Edit|Write, so `echo x > .env` and `cp .env /tmp`
+# bypass it entirely. This mirrors that hook's path rules for the shell: the
+# same allowlist (.env.sample, .env.example, *.key.sample), the same targets.
+is_protected_path() {
+  local p="$1" base
+  p=${p//\"/}
+  p=${p//\'/}
+  base=${p##*/}
+
+  case "$base" in
+    .env.sample|.env.example|*.key.sample) return 1 ;;
+  esac
+  case "$base" in
+    .env|.env.*|master.key|*.pem|*.key) return 0 ;;
+  esac
+  case "$p" in
+    config/credentials/*|*/config/credentials/*) return 0 ;;
+  esac
+  return 1
+}
+
+secret_deny() {
+  deny "Refusing to write or copy $1 from a shell command: it holds real credentials. Update .env.sample instead and tell the user which variable to set."
+}
+
+# Redirect targets: `> path`, `>> path`.
+while read -r target; do
+  [ -n "$target" ] && is_protected_path "$target" && secret_deny "$target"
+done < <(printf '%s' "$cmd" | grep -oE '>>?[[:space:]]*[^[:space:];&|<>]+' | sed -E 's/^>>?[[:space:]]*//')
+
+# Commands whose arguments are files they mutate — or, for cp/mv, exfiltrate.
+if printf '%s' "$cmd" | grep -qE '(^|[;&|[:space:]])(rm|mv|cp|tee|truncate|install|ln|shred)([[:space:]]|$)' ||
+  printf '%s' "$cmd" | grep -qE 'sed[[:space:]]+(-[a-zA-Z]+[[:space:]]+)*-i'; then
+  set -f
+  for tok in $cmd; do
+    case "$tok" in -*) continue ;; esac
+    is_protected_path "$tok" && secret_deny "$tok"
+  done
+  set +f
 fi
 
 # Committing and pushing are the user's to do, always.

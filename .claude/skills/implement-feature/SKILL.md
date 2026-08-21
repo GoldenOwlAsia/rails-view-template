@@ -1,6 +1,6 @@
 ---
 name: implement-feature
-description: Build a feature in this Rails app by first finding an analogous existing implementation, then placing each piece in the layer that already exists for it. Use when adding new functionality.
+description: Build a feature in this Rails app by first finding an analogous existing implementation, then placing each piece in the layer that already exists for it. Covers schema and migration work under strong_migrations. Use when adding new functionality, or when changing a schema, index, constraint or column.
 ---
 
 Implement: $ARGUMENTS
@@ -34,30 +34,45 @@ Order that works well here: backend (migration → model → policy →
 operation/query → permit_params → controller, in that internal order) →
 frontend (view → Stimulus) → async (job/mailer), where each phase applies.
 
-Follow `.claude/rules/` for each layer — they load as you open the files. For
-a feature that touches several layers, dispatch the matching write-capable
-agent below instead of writing every layer inline yourself when the feature
-is large enough to benefit from the isolation. For a small, single-file
-change, just write it directly.
+Follow `.claude/rules/` for each layer — they load as you open the files, so
+the conventions arrive with the code rather than needing to be recited here.
+Write each layer yourself and verify it before starting the next; don't write
+six layers and verify once at the end, and never let a later layer paper over
+an earlier one being wrong (a model tightening what the migration should have
+enforced in the database, a controller inlining logic an operation should own).
 
-- `backend-agent` — models, validators, migrations, policies, operations,
-  queries, permit_params, and controllers
-- `frontend-agent` — views, ViewComponents, and Stimulus controllers
-- `async-agent` — background jobs and mailers
-- `rspec-agent` — standalone spec work not already covered by the above
+### If the work changes the schema
+
+This is the first step of the backend order above, and it applies whether
+the migration is part of a feature or is the whole task.
+
+1. Read `db/schema.rb` for the tables involved, then the models — existing
+   validations, associations, `implicit_order_column`.
+2. Decide what the database must enforce versus what the model merely
+   asserts. A uniqueness validation with no unique index behind it is a
+   race, not a guarantee.
+3. State which mode applies — squash (edit the original migration, then
+   regenerate the schema) or deployed (append a new migration, never touch
+   one that has already run) — *before* touching a migration file.
+4. For anything beyond a trivial column add, dispatch `reviewer-agent`
+   (read-only, Database section) to audit the planned change before it is
+   written. Locking, concurrent indexes, constraints, backfills, rollback
+   and deploy order are all covered by the checklist in
+   `.claude/rules/models-and-migrations.md`, which auto-loads once you open
+   a migration and is maintained there rather than repeated here.
+5. Verify with that rule file's own "Verify" commands, not just the ones in
+   Phase 4 below.
 
 ## Phase 4 — Verify
 
 Run the commands from `CLAUDE.md`'s Workflow section that apply to what
-changed, and paste real output for each — never claim one passed without
-running it.
+changed, and paste real output for each.
 
-If `backend-agent` touched anything beyond a trivial single-layer change —
-a migration beyond a column add, or anything touching auth, admin, uploads,
-or permissions — dispatch `reviewer-agent` now. Don't rely on
-`backend-agent`'s own self-report as the only check, even when it says its
-own verification passed; one dispatch now covers the whole backend, so an
-independent read-only pass matters more than it did per-layer.
+If the change went beyond a trivial single layer — a migration beyond a column
+add, or anything touching auth, admin, uploads, or permissions — dispatch
+`reviewer-agent` now. Your own verification passing is not the same as a
+second pass over the diff with fresh eyes, which is the whole reason that
+agent is read-only and separate.
 
 ## Phase 5 — Review your own diff
 
