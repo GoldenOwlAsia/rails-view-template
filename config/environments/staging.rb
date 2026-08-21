@@ -77,6 +77,17 @@ Rails.application.configure do
   # Store files locally.
   config.active_storage.service = :local
 
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
+  # Enable web console on staging only; production never sets this. The
+  # permission list is deliberately not 0.0.0.0/0: web_console hands out a REPL
+  # running inside the app process to anyone who can reach an error page, and
+  # staging usually carries production-shaped data. Default to private ranges
+  # and let deploys widen it explicitly.
+  config.web_console.development_only = false
+  config.web_console.permissions = ENV.fetch('WEB_CONSOLE_CIDR', '10.0.0.0/8')
+
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com

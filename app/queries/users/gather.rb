@@ -7,10 +7,11 @@ module Users
 
     private
 
-    def by_email(email)
-      return self if email.blank?
-
-      where(email: email)
+    # ApplicationQuery#filter already returns early when the value is blank and
+    # invokes this as send(:by_email, scope, value), so the signature has to take
+    # the scope and return a relation built from it.
+    def by_email(scope, email)
+      scope.where(email:)
     end
   end
 end

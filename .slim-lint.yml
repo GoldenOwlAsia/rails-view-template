@@ -1,0 +1,13 @@
+linters:
+  # Tailwind utility chains and inline SVG paths make raw line length a poor
+  # signal in markup, and .rb keeps its own budget via Layout/LineLength.
+  LineLength:
+    enabled: false
+
+  # RuboCop already lints .slim through the rubocop-slim plugin (see the
+  # plugins list in .rubocop.yml), where it reads real source. Running it a
+  # second time here means judging Ruby that slim-lint extracted out of the
+  # template, so the layout cops measure Slim's indentation rather than Ruby's
+  # and every trailing template expression looks like a void statement.
+  RuboCop:
+    enabled: false

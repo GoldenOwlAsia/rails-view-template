@@ -13,60 +13,15 @@
           = @presenter.peak_month_name
 
   div class="grid grid-cols-2 gap-3 md:grid-cols-4"
-    div class="rounded-2xl p-3 text-left bg-base-200"
-      div class="mb-2 flex items-center justify-between"
-        div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
-          i.text-gray-700.dark:text-gray-200 data-lucide="users" style="width: 16px; height: 16px;"
-        span class="text-xs font-medium uppercase tracking-wide text-base-content"
-          | Total users
-      p class="text-xl font-semibold text-base-content"
-        = @presenter.user_count
-
-    div class="rounded-2xl p-3 text-left bg-base-200"
-      div class="mb-2 flex items-center justify-between"
-        div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
-          i.text-gray-700.dark:text-gray-200 data-lucide="calendar" style="width: 16px; height: 16px;"
-        span class="text-xs font-medium uppercase tracking-wide text-base-content"
-          | New this year
-      p class="text-xl font-semibold text-base-content"
-        = @presenter.users_this_year
-
-    div class="rounded-2xl p-3 text-left bg-base-200"
-      div class="mb-2 flex items-center justify-between"
-        div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
-          i.text-gray-700.dark:text-gray-200 data-lucide="plus-circle" style="width: 16px; height: 16px;"
-        span class="text-xs font-medium uppercase tracking-wide text-base-content"
-          | New this month
-      p class="text-xl font-semibold text-base-content"
-        = @presenter.users_this_month
-
-    div class="rounded-2xl p-3 text-left bg-base-200"
-      div class="mb-2 flex items-center justify-between"
-        div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
-          i.text-gray-700.dark:text-gray-200 data-lucide="clock" style="width: 16px; height: 16px;"
-        span class="text-xs font-medium uppercase tracking-wide text-base-content"
-          | New today
-      p class="text-xl font-semibold text-base-content"
-        = @presenter.users_today
+    = render StatTileComponent.new(label: 'Total users', value: @presenter.user_count, icon: 'users')
+    = render StatTileComponent.new(label: 'New this year', value: @presenter.users_this_year, icon: 'calendar')
+    = render StatTileComponent.new(label: 'New this month', value: @presenter.users_this_month, icon: 'plus-circle')
+    = render StatTileComponent.new(label: 'New today', value: @presenter.users_today, icon: 'clock')
 
   div class="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3"
-    div class="rounded-2xl bg-base-200 p-3 text-left"
-      div class="mb-2 flex items-center justify-between"
-        span class="text-xs font-medium uppercase tracking-wide text-base-content" Avg. / month
-      p class="mt-1 text-xl font-semibold text-base-content"
-        = @presenter.average_users_per_month
-
-    div class="rounded-2xl bg-base-200 p-3 text-left"
-      div class="mb-2 flex items-center justify-between"
-        span class="text-xs font-medium uppercase tracking-wide text-base-content" This month vs last
-      p class="mt-1 text-xl font-semibold text-base-content"
-        = @presenter.user_change_percent
-
-    div class="rounded-2xl bg-base-200 p-3 text-left"
-      div class="mb-2 flex items-center justify-between"
-        span class="text-xs font-medium uppercase tracking-wide text-base-content" Selected year
-      p class="mt-1 text-xl font-semibold text-base-content"
-        = @presenter.year
+    = render StatTileComponent.new(label: 'Avg. / month', value: @presenter.average_users_per_month)
+    = render StatTileComponent.new(label: 'This month vs last', value: @presenter.user_change_percent)
+    = render StatTileComponent.new(label: 'Selected year', value: @presenter.year)
 
 .col-span-12 class="col-span-6 rounded-2xl bg-base-300 p-6 md:p-8" data-controller='user-area' data-user-area-stats-value=@presenter.user_12_months.to_json
   div class="mb-6 flex items-center justify-between"

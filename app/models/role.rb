@@ -11,7 +11,7 @@
 #
 # Indexes
 #
-#  index_roles_on_name_and_resource_type_and_resource_id  (name,resource_type,resource_id)
+#  index_roles_on_name_and_resource_type_and_resource_id  (name,resource_type,resource_id) UNIQUE NULLS NOT DISTINCT
 #  index_roles_on_resource                                (resource_type,resource_id)
 #
 class Role < ApplicationRecord
@@ -23,5 +23,8 @@ class Role < ApplicationRecord
   has_and_belongs_to_many :users, join_table: :users_roles # rubocop:disable Rails/HasAndBelongsToMany
 
   validates :resource_type, inclusion: { in: Rolify.resource_types }, allow_nil: true
-  validates :name, inclusion: { in: NAMES }, uniqueness: true # rubocop:disable Rails/UniqueValidationWithoutIndex
+  # Rolify scopes roles by resource, so a name is unique per resource rather
+  # than globally. Backed by the unique index on
+  # (name, resource_type, resource_id).
+  validates :name, inclusion: { in: NAMES }, uniqueness: { scope: %i[resource_type resource_id] }
 end
