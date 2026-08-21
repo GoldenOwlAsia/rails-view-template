@@ -11,7 +11,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[8.1]
       t.references :role, type: :uuid
     end
 
-    add_index(:roles, [ :name, :resource_type, :resource_id ], unique: true)
+    add_index(:roles, [ :name, :resource_type, :resource_id ], unique: true, nulls_not_distinct: true)
     add_index(:users_roles, [ :user_id, :role_id ])
   end
 end

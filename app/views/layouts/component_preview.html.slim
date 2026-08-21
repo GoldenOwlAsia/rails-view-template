@@ -2,11 +2,14 @@
 /
 / Deliberately not the application layout: that one renders layouts/_header,
 / which reads current_user.avatar, and a preview has nobody signed in. This
-/ pulls in the same head — so Vite assets, Tailwind and the theme all apply —
-/ and nothing else.
+/ pulls in the same head — so Vite assets and Tailwind apply — and nothing else.
+/
+/ Only the icons controller is attached. The theme controller requires its
+/ checkbox target, which lives in the header this layout does not render, and
+/ raises "Missing target element" on connect without it.
 doctype html
 html[lang="en"]
   head
     = render 'layouts/head'
-  body.p-8 data-controller="icons theme"
+  body.p-8 data-controller="icons"
     = yield
