@@ -78,6 +78,10 @@ ThreadSafety/DirChdir:
 RSpec/ExampleLength:
   Max: 10
 
+RSpec/DescribeClass:
+  Exclude:
+    - spec/architecture_spec.rb
+
 Lint/AmbiguousBlockAssociation:
   Enabled: false
 
