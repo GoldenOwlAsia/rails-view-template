@@ -1,3 +1,3 @@
-Pagy.options[:limit] = 10
-Pagy.options[:overflow] = :last_page
-Pagy.options[:metadata] = %i[limit count page prev next last]
+Pagy::OPTIONS[:limit] = 10
+Pagy::OPTIONS[:overflow] = :last_page
+Pagy::OPTIONS[:metadata] = %i[limit count page prev next last]

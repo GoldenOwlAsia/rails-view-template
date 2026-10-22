@@ -77,6 +77,10 @@ Rails.application.configure do
   # Store files locally.
   config.active_storage.service = :amazon
 
+  # Structured, parseable request logs instead of Rails' multi-line format.
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com

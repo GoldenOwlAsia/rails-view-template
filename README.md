@@ -7,7 +7,7 @@ This is a Rails boilerplate use rails 8.1.1
 This project requires:
 
 - Ruby (see [.ruby-version](./.ruby-version)), preferably managed using [rbenv](https://github.com/rbenv/rbenv) or [asdf](https://asdf-vm.com/)
-- Node 23.5.0
+- Node (see [.node-version](./.node-version) / [.nvmrc](./.nvmrc)), preferably managed using [nvm](https://github.com/nvm-sh/nvm) or [asdf](https://asdf-vm.com/)
 - Yarn 1.x (classic)
 - PostgreSQL must be installed and accepting connections
 
@@ -15,7 +15,7 @@ On macOS, these [Homebrew](http://brew.sh) packages are recommended:
 
 ```sh
   brew install rbenv
-  brew install node 23.5.0
+  brew install nvm
   brew install yarn
   brew install postgresql@16
   brew install redis
@@ -39,7 +39,7 @@ This project currently uses [Ruby 3.4.7](blob/staging/.ruby-version), which is m
 
 **Install Nodejs**:
 
-This project user [Node 23.5.0 d](https://nodejs.org/en/blog/release/v23.5.0), which is most easily managed through a version manager like [asdf](https://github.com/asdf-vm/asdf-nodejs), [rvm](https://github.com/nvm-sh/nvm)
+The Node version lives in [.node-version](./.node-version) (read by CI and asdf) and [.nvmrc](./.nvmrc) (read by nvm); keep the two in sync. With [nvm](https://github.com/nvm-sh/nvm) installed, run `nvm install` once and `nvm use` in the project directory — both pick the version up from `.nvmrc` with no argument.
 
 **Install Ruby gems**:
 
@@ -191,96 +191,100 @@ Later steps expect a `RACK_ENV` environment variable, so define one (usually 'de
   ```
 
 ```yaml
----
-|
+--- |
   .
-  ├── CHANGELOG.md
-  ├── DEPLOYMENT.md
-  ├── Dockerfile
-  ├── Gemfile
-  ├── Gemfile.lock
-  ├── Procfile
-  ├── README.md
-  ├── Rakefile
-  ├── app
-  │   ├── channels
-  │   ├── controllers
-  │   ├── frontend
-  │   ├── helpers
-  │   ├── models
-  │   ├── policies
-  │   ├── queries
-  │   ├── services
-  │   ├── structure.txt
-  │   └── views
-  ├── bin
-  │   ├── brakeman
-  │   ├── bundle
-  │   ├── bundle-audit
-  │   ├── bundler-audit
-  │   ├── dev
-  │   ├── docker-entrypoint
-  │   ├── rails
-  │   ├── rake
-  │   ├── rspec
-  │   ├── rubocop
-  │   ├── setup
-  │   └── vite
-  ├── cliff.toml
-  ├── commitlint.config.js
-  ├── config
-  │   ├── application.rb
-  │   ├── boot.rb
-  │   ├── cable.yml
-  │   ├── credentials.yml.enc
-  │   ├── database.yml
-  │   ├── database.yml.sample
-  │   ├── environment.rb
-  │   ├── environments
-  │   ├── i18n-tasks.yml
-  │   ├── initializers
-  │   ├── locales
-  │   ├── master.key
-  │   ├── mermaid_erd.yml
-  │   ├── puma.rb
-  │   ├── routes.rb
-  │   ├── sidekiq.yml
-  │   ├── storage.rb
-  │   ├── storage.yml
-  │   └── vite.json
-  ├── config.ru
-  ├── coverage
-  │   ├── assets
-  │   └── index.html
-  ├── db
-  │   ├── migrate
-  │   ├── schema.rb
-  │   ├── seeds
-  │   └── seeds.rb
-  ├── docs
-  │   └── erd.html
-  ├── eslint.config.js
-  ├── lefthook.yml
-  ├── lib
-  │   ├── assets
-  │   ├── tasks
-  │   └── templates
-  ├── package.json
-  ├── postcss.config.cjs
-  ├── spec
-  │   ├── cassettes
-  │   ├── factories
-  │   ├── fixtures
-  │   ├── helpers
-  │   ├── i18n_spec.rb
-  │   ├── mailers
-  │   ├── models
-  │   ├── queries
-  │   ├── rails_helper.rb
-  │   ├── spec_helper.rb
-  │   ├── supports
-  │   └── views
-  ├── tailwind.config.js
-  ├── vite.config.ts
-  └── yarn.lock
+  |-- CHANGELOG.md
+  |-- CLAUDE.md
+  |-- DEPLOYMENT.md
+  |-- Dockerfile
+  |-- Gemfile
+  |-- Gemfile.lock
+  |-- Procfile
+  |-- README.md
+  |-- Rakefile
+  |-- app
+  |   |-- channels
+  |   |-- controllers
+  |   |-- frontend
+  |   |-- helpers
+  |   |-- jobs
+  |   |-- mailers
+  |   |-- models
+  |   |-- operations
+  |   |-- permit_params
+  |   |-- policies
+  |   |-- presenters
+  |   |-- queries
+  |   |-- validators
+  |   `-- views
+  |-- bin
+  |   |-- brakeman
+  |   |-- bundle
+  |   |-- bundle-audit
+  |   |-- bundler-audit
+  |   |-- dev
+  |   |-- docker-entrypoint
+  |   |-- rails
+  |   |-- rake
+  |   |-- rspec
+  |   |-- rubocop
+  |   |-- setup
+  |   `-- vite
+  |-- cliff.toml
+  |-- commitlint.config.js
+  |-- config
+  |   |-- application.rb
+  |   |-- boot.rb
+  |   |-- cable.yml
+  |   |-- credentials.yml.enc
+  |   |-- database.yml
+  |   |-- database.yml.sample
+  |   |-- environment.rb
+  |   |-- environments
+  |   |-- i18n-tasks.yml
+  |   |-- initializers
+  |   |-- locales
+  |   |-- mermaid_erd.yml
+  |   |-- puma.rb
+  |   |-- routes
+  |   |-- routes.rb
+  |   |-- schedule.yml
+  |   |-- sidekiq.yml
+  |   |-- storage.rb
+  |   |-- storage.yml
+  |   `-- vite.json
+  |-- config.ru
+  |-- coverage
+  |   |-- assets
+  |   `-- index.html
+  |-- db
+  |   |-- migrate
+  |   |-- schema.rb
+  |   `-- seeds
+  |-- docs
+  |   `-- erd.html
+  |-- eslint.config.js
+  |-- lefthook.yml
+  |-- lib
+  |   |-- assets
+  |   |-- tasks
+  |   `-- templates
+  |-- package.json
+  |-- postcss.config.mjs
+  |-- spec
+  |   |-- cassettes
+  |   |-- factories
+  |   |-- fixtures
+  |   |-- helpers
+  |   |-- i18n_spec.rb
+  |   |-- mailers
+  |   |-- models
+  |   |-- queries
+  |   |-- rails_helper.rb
+  |   |-- spec_helper.rb
+  |   |-- supports
+  |   `-- system
+  |-- tailwind.config.js
+  |-- vite.config.ts
+  `-- yarn.lock
 ```

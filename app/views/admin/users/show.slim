@@ -1,6 +1,6 @@
 - provide(:title, 'User Detail')
 
-= render 'admin/shared/breadcrumb', breadcrumbs: [{ name: 'Dashboard', path: admin_root_path }, { name: 'Users', path: admin_users_path }, { name: 'User Detail' }]
+= render BreadcrumbComponent.new(crumbs: [{ name: 'Dashboard', path: admin_root_path }, { name: 'Users', path: admin_users_path }, { name: 'User Detail' }])
 
 .min-h-screen.p-6 data-controller="icons"
   .max-w-6xl.mx-auto

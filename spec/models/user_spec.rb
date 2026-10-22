@@ -28,11 +28,12 @@
 #
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_lower_email           (lower((email)::text)) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   describe 'associations' do
     it { is_expected.to have_one_attached(:avatar) }
   end
@@ -52,7 +53,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'with invalid content type' do
-      it 'is invalid when the content type is incorrect' do
+      it 'is invalid when the content type is incorrect', :aggregate_failures do
         user.avatar.attach(
           io: Rails.root.join('spec/fixtures/files/text.txt').open,
           filename: 'avatar.txt',
@@ -67,7 +68,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'with large avatar' do
-      it 'is invalid when the size exceeds the limit' do
+      it 'is invalid when the size exceeds the limit', :aggregate_failures do
         user.avatar.attach(
           io: Rails.root.join('spec/fixtures/files/image.png').open,
           filename: 'large_image.jpg',
@@ -83,27 +84,27 @@ RSpec.describe User, type: :model do
 
   describe 'Devise modules' do
     it 'includes database_authenticatable module' do
-      expect(User.devise_modules).to include(:database_authenticatable)
+      expect(described_class.devise_modules).to include(:database_authenticatable)
     end
 
     it 'includes registerable module' do
-      expect(User.devise_modules).to include(:registerable)
+      expect(described_class.devise_modules).to include(:registerable)
     end
 
     it 'includes recoverable module' do
-      expect(User.devise_modules).to include(:recoverable)
+      expect(described_class.devise_modules).to include(:recoverable)
     end
 
     it 'includes rememberable module' do
-      expect(User.devise_modules).to include(:rememberable)
+      expect(described_class.devise_modules).to include(:rememberable)
     end
 
     it 'includes validatable module' do
-      expect(User.devise_modules).to include(:validatable)
+      expect(described_class.devise_modules).to include(:validatable)
     end
 
     it 'includes omniauthable module' do
-      expect(User.devise_modules).to include(:omniauthable)
+      expect(described_class.devise_modules).to include(:omniauthable)
     end
   end
 

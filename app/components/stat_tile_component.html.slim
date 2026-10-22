@@ -1,0 +1,9 @@
+div class="rounded-2xl bg-base-200 p-3 text-left"
+  div class="mb-2 flex items-center justify-between"
+    - if icon?
+      div class="flex h-8 w-8 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-gray-900/80"
+        i.text-gray-700.dark:text-gray-200 data-lucide=icon style="width: 16px; height: 16px;"
+    span class="text-xs font-medium uppercase tracking-wide text-base-content"
+      = label
+  p class=value_classes
+    = value

@@ -49,7 +49,7 @@ ActiveRecord::Schema[8.1].define(version: 2024_10_04_100359) do
     t.uuid "resource_id"
     t.string "resource_type"
     t.datetime "updated_at", null: false
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", unique: true, nulls_not_distinct: true
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
@@ -74,6 +74,7 @@ ActiveRecord::Schema[8.1].define(version: 2024_10_04_100359) do
     t.string "uid"
     t.string "unconfirmed_email"
     t.datetime "updated_at", null: false
+    t.index "lower((email)::text)", name: "index_users_on_lower_email", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

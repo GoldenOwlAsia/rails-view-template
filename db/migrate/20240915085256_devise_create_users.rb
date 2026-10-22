@@ -40,6 +40,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.1]
     end
 
     add_index :users, :email, unique: true
+    add_index :users, 'lower(email)', unique: true, name: 'index_users_on_lower_email'
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token, unique: true
     # add_index :users, :unlock_token,         unique: true
