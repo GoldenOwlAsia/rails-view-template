@@ -99,7 +99,7 @@ habit into one.
 
 ### Verify
 
-Run these and paste the actual output (`CLAUDE.md`, Workflow):
+Run these and paste the actual output (`AGENTS.md`, Workflow):
 
 - `RAILS_ENV=test bin/rails db:migrate:status` — no `NO FILE` entries
 - `git diff db/schema.rb` — only the intended change, no unrelated version churn

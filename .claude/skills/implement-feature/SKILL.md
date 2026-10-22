@@ -51,7 +51,7 @@ rule file's own "Verify" commands as well as the ones in Phase 4 below.
 
 ## Phase 4 — Verify
 
-Run the commands from `CLAUDE.md`'s Workflow section that apply to what
+Run the commands from `AGENTS.md`'s Workflow section that apply to what
 changed, and paste real output for each.
 
 If the change went beyond a trivial single layer — a migration beyond a column

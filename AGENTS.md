@@ -54,10 +54,11 @@ database, security — fresh eyes on finished work) and `bug-investigator`
 
 `.claude/skills/` holds the workflows, picked by the model from the prompt or
 invoked by name. `implement-feature` is the multi-layer one;
-`create-migration`, `create-controller` and `create-component` are the
-single-layer entry points, `accessibility-review` is a read-only audit of the
-views and components, and `upgrade-dependencies` plus `repo-consistency-audit`
-are the periodic maintenance pair. Their descriptions are deliberately disjoint — a skill that
+`create-migration`, `create-controller`, `create-component`,
+`create-operation`, `create-query` and `create-job-or-mailer` are the
+single-layer entry points, `accessibility-review` is a read-only audit of the views and
+components, and `upgrade-dependencies` plus `repo-consistency-audit` are the
+periodic maintenance pair. Their descriptions are deliberately disjoint — a skill that
 overlaps another's trigger makes the choice between them arbitrary, so a new
 one has to state what it is *not* for as much as what it is.
 
