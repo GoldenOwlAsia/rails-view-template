@@ -1,6 +1,6 @@
 ---
 name: create-controller
-description: Expose an existing model over HTTP — route, controller, Pundit policy, permit_params class, views and specs, wired the way this app already does it. Use when the model exists and the task is adding or extending an endpoint or CRUD screen.
+description: Expose an existing model over HTTP — route, controller, Pundit policy, permit_params class, views and specs, wired the way this app already does it. Use whenever the model exists and the task is adding or extending an endpoint, a controller action, an admin page or a CRUD screen, even if the user never says "controller". If the model does not exist yet, implement-feature handles it instead.
 ---
 
 Endpoint: $ARGUMENTS
@@ -21,7 +21,7 @@ subclasses live under `Authentication::`.
 **`Crudable` or explicit actions?** A standard CRUD screen over one model is
 `include Crudable` plus a `crud_to` declaration —
 `app/controllers/admin/users_controller.rb` is the whole worked example and is
-19 lines. Anything that is not seven-actions-over-one-model writes its actions
+short. Anything that is not seven-actions-over-one-model writes its actions
 out; `Admin::DashboardController` is that shape.
 
 **Which route file?** `config/routes.rb` only draws `system`, `user` and

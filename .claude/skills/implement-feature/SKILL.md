@@ -43,26 +43,11 @@ enforced in the database, a controller inlining logic an operation should own).
 
 ### If the work changes the schema
 
-This is the first step of the backend order above. Stay here rather than
-switching to `create-migration` — that skill is for a migration with no feature
-around it, and the steps below are the same ones it follows.
-
-1. Read `db/schema.rb` for the tables involved, then the models — existing
-   validations, associations, and the indexes already on the table.
-2. Decide what the database must enforce versus what the model merely
-   asserts. A uniqueness validation with no unique index behind it is a
-   race, not a guarantee.
-3. State which mode applies — squash (edit the original migration, then
-   regenerate the schema) or deployed (append a new migration, never touch
-   one that has already run) — *before* touching a migration file.
-4. For anything beyond a trivial column add, dispatch `reviewer-agent`
-   (read-only, Database section) to audit the planned change before it is
-   written. Locking, concurrent indexes, constraints, backfills, rollback
-   and deploy order are all covered by the checklist in
-   `.claude/rules/models-and-migrations.md`, which auto-loads once you open
-   a migration and is maintained there rather than repeated here.
-5. Verify with that rule file's own "Verify" commands, not just the ones in
-   Phase 4 below.
+This is the first step of the backend order above. Follow `create-migration`
+steps 1–3 (current shape, squash-vs-deployed mode declared *before* touching a
+file, then the checklist in `.claude/rules/models-and-migrations.md`) rather
+than restating them here — one maintained copy cannot drift. Verify with that
+rule file's own "Verify" commands as well as the ones in Phase 4 below.
 
 ## Phase 4 — Verify
 

@@ -1,6 +1,6 @@
 ---
 name: create-component
-description: Add a ViewComponent to this Rails app — class, sidecar Slim template, Lookbook preview and spec. Use when markup gains variants, or is worth rendering and testing on its own, rather than staying a partial or a helper.
+description: Add a ViewComponent to this Rails app — class, sidecar Slim template, Lookbook preview and spec. Use whenever the user wants a reusable UI piece — a card, badge, alert, tile, breadcrumb, modal — or markup that has gained variants or is worth rendering and testing on its own, rather than staying a partial or a helper.
 ---
 
 Component: $ARGUMENTS

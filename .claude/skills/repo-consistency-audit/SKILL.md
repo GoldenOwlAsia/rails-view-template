@@ -1,7 +1,9 @@
 ---
 name: repo-consistency-audit
-description: Find places where this repo contradicts itself — version pins, documented vs actual architecture, config paths pointing at directories that no longer exist, tooling installed but never run. Use periodically and before onboarding someone.
+description: Find places where this repo contradicts itself — version pins, documented vs actual architecture, config paths pointing at directories that no longer exist, tooling installed but never run. Use whenever asked to check the repo for stale docs, mismatched Ruby/Node/Yarn versions, dead config or CI paths, unused gems, orphaned classes or an out-of-date README, and before onboarding someone. Read-only unless told to fix.
 ---
+
+Scope: $ARGUMENTS (default: all six sections)
 
 Audit the repository for internal contradictions. These matter more than style:
 a stale README teaches the wrong architecture to every new reader, human or

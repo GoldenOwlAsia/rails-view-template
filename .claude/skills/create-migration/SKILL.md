@@ -23,7 +23,7 @@ Say which one applies, out loud, before opening any migration:
 - **squash** — edit the original `create_table` migration, then regenerate the
   schema. This is the template's default, and it carries a trap: every
   migration in the repo today is at or before
-  `StrongMigrations.start_after` (20241004100359), so the gem checks *nothing*
+  `StrongMigrations.start_after` (`config/initializers/strong_migrations.rb`), so the gem checks *nothing*
   when you edit one. Locks, rewrites and backfills are yours to reason about by
   hand there.
 - **deployed** — append a new migration and never touch one that has already

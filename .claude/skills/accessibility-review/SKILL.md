@@ -1,6 +1,7 @@
 ---
 name: accessibility-review
-description: Audit this app's Slim views, ViewComponents and Stimulus controllers against WCAG 2.2 AA and report findings with file:line and a fix. Read-only — it never edits. Use when asked for an accessibility or a11y audit, or when keyboard navigation, screen readers, ARIA, focus order or colour contrast come up.
+description: Audit this app's Slim views, ViewComponents and Stimulus controllers against WCAG 2.2 AA and report findings with file:line and a fix. Read-only — it never edits. Use whenever asked for an accessibility or a11y audit or review, and whenever keyboard navigation, screen readers, ARIA, focus order, WCAG or colour contrast come up for a view or component.
+allowed-tools: Read, Grep, Glob, Bash
 ---
 
 Audit: $ARGUMENTS (default: every view and component)
