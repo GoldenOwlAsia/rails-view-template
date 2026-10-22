@@ -1,7 +1,3 @@
-# frozen_string_literal: true
-
-# load extras lib
-Dir[Rails.root.join('lib/components/**/*.rb')].each { |f| require f }
 
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
@@ -25,7 +21,7 @@ SimpleForm.setup do |config|
   config.include_default_input_wrapper_class = false
 
   # CSS class to add for error notification helper.
-  config.error_notification_class = 'alert alert-error'
+  # config.error_notification_class = 'alert alert-error'
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
@@ -40,7 +36,7 @@ SimpleForm.setup do |config|
   # vertical forms
   #
   # vertical default_wrapper
-  config.wrappers :vertical_form, tag: 'div', class: 'form-control mb-2 form-control-wrap' do |b|
+  config.wrappers :vertical_form, tag: 'div', class: 'form-control mb-2 form-control-wrap w-full' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -51,14 +47,14 @@ SimpleForm.setup do |config|
     b.use :label, class: 'label', error_class: 'text-error'
     b.use :input, class: 'input input-bordered', error_class: 'input-error', valid_class: 'input-success'
     b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-error text-xs italic w-full' }
-    b.wrapper tag: 'label', class: 'label hint' do |ba|
-      ba.use :hint, wrap_with: { tag: 'span', class: 'label-text-alt' }
-    end
+    # b.wrapper tag: 'label', class: 'label hint' do |ba|
+    #   ba.use :hint, wrap_with: { tag: 'span', class: 'label-text-alt' }
+    # end
   end
 
   config.wrappers :input_group,
     tag: 'div',
-    class: 'form-control mb-2 form-control-wrap',
+    class: 'form-control mb-2 form-control-wrap w-full',
     error_class: 'form-group-invalid' do |b|
     b.use :html5
     b.use :placeholder
@@ -88,9 +84,9 @@ SimpleForm.setup do |config|
     b.use :label, class: 'label', error_class: 'text-error'
     b.use :input, class: 'textarea textarea-bordered', error_class: 'textarea-error', valid_class: 'textarea-success'
     b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-error text-xs italic' }
-    b.wrapper tag: 'label', class: 'label hint' do |ba|
-      ba.use :hint, wrap_with: { tag: 'span', class: 'label-text-alt' }
-    end
+    # b.wrapper tag: 'label', class: 'label hint' do |ba|
+    #   ba.use :hint, wrap_with: { tag: 'span', class: 'label-text-alt' }
+    # end
   end
 
   # vertical input for select
@@ -101,9 +97,9 @@ SimpleForm.setup do |config|
     b.use :label, class: 'label', error_class: 'text-error'
     b.use :input, class: 'select select-bordered', error_class: 'select-error', valid_class: 'select-success'
     b.use :full_error, wrap_with: { tag: 'p', class: 'mt-2 text-error text-xs italic' }
-    b.wrapper tag: 'label', class: 'label hint' do |ba|
-      ba.use :hint, wrap_with: { tag: 'span', class: 'label-text-alt' }
-    end
+    # b.wrapper tag: 'label', class: 'label hint' do |ba|
+    #   ba.use :hint, wrap_with: { tag: 'span', class: 'label-text-alt' }
+    # end
   end
 
   # vertical input for boolean (aka checkboxes)

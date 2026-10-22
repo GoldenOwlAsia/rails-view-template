@@ -1,4 +1,4 @@
-label class="swap swap-rotate"
-  input type="checkbox" data-controller="theme" data-action="change->theme#switch" data-theme-target='checkbox'
+label class="swap swap-rotate" for='theme-switch' data-action="click->theme#switch"
+  input type="checkbox" id='theme-switch' data-theme-target='checkbox'
   = lucide_icon('sun', class: 'swap-on')
   = lucide_icon('moon', class: 'swap-off')

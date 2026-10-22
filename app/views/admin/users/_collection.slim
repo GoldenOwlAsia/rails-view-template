@@ -1,0 +1,50 @@
+- if @users.empty?
+  = render 'shared/empty_list'
+- else
+  .relative.overflow-x-auto.shadow-lg.mt-2 class="sm:rounded-lg"
+    table.w-full.text-sm.text-left
+      thead.bg-base-200
+        th.px-6.py-4[scope="col"]
+          span.font-semibold User
+        th.px-6.py-4[scope="col"]
+          span.font-semibold Status
+        th.px-6.py-4[scope="col"]
+          span.font-semibold Joined At
+        th.px-6.py-4[scope="col"]
+          span.font-semibold Actions
+
+      tbody.divide-y.divide-base-100
+        - @users.each_with_index do |user, index|
+          tr.hover:bg-base-200.transition-colors.duration-200 class="#{index.even? ? 'bg-base-100' : 'bg-base-200'}"
+            td.px-6.py-4
+              .flex.items-center.gap-3
+                .relative
+                  = attachment_image_tag user.avatar, class: 'w-12 h-12 rounded-full object-cover border-2 border-gray-200 shadow-sm'
+                .flex-1.min-w-0
+                  .text-sm.font-semibold.truncate
+                    = user.full_name.presence || 'Unknown User'
+                  .text-sm.truncate
+                    = user.email || 'No email'
+            td.px-6.py-4
+              span.inline-flex.items-center.px-2.py-1.rounded-full.text-xs.font-medium.bg-green-100.text-green-800
+                | Active
+            td.px-6.py-4
+              .text-sm.text-base-900
+                = display_datetime(user.created_at)
+              .text-xs.text-base-500
+                = "#{time_ago_in_words(user.created_at)} ago"
+            td.px-6.py-4
+              .flex.items-center.gap-2
+                = link_to admin_user_path(user),
+class: 'inline-flex items-center px-3 py-1.5 text-xs font-medium text-green-600 bg-green-50 border border-green-200 rounded-md hover:bg-green-100 hover:border-green-300 transition-all duration-200',
+title: "Show #{user.full_name}"
+                  i data-lucide="eye" class="mr-1 w-4 h-4"
+                  | Show
+                = link_to edit_admin_user_path(user),
+class: 'inline-flex items-center px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 hover:border-blue-300 transition-all duration-200',
+title: "Edit #{user.full_name}"
+                  i data-lucide="edit" class="mr-1 w-4 h-4"
+                  | Edit
+
+  .pagy
+    == @pagy.series_nav(:bulma) if @pagy.pages > 1

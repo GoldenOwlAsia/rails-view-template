@@ -59,3 +59,6 @@ coverage/**/*
 
 # Ignore erd file
 docs/erd.html
+
+# Claude Code: personal overrides stay local, shared config is committed
+.claude/settings.local.json

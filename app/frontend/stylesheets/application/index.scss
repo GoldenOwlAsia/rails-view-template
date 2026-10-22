@@ -1,4 +1,5 @@
-@import "../shared/application.tailwind";
-@import "../shared/reset";
-@import "../shared/base";
-@import "../shared/pagy";
+@use '@/stylesheets/shared/tailwind';
+
+@use '@/stylesheets/shared/reset';
+@use '@/stylesheets/shared/base';
+@use '@/stylesheets/shared/pagy';

@@ -1,5 +1,5 @@
 .pagy {
-  @apply flex space-x-1 font-semibold text-sm text-gray-500;
+  @apply flex space-x-1 font-semibold text-sm text-gray-500 justify-end mt-4;
 
   a:not(.gap) {
     @apply block rounded-lg px-3 py-1 bg-gray-200;
@@ -19,10 +19,14 @@
   }
 
   label {
-    @apply inline-block whitespace-nowrap bg-gray-200 rounded-lg px-3 py-0.5;
+    @apply inline-block whitespace-nowrap bg-base-200 rounded-lg px-3 py-0.5;
 
     input {
-      @apply bg-gray-100 border-none rounded-md;
+      @apply bg-base-200 border-none rounded-md;
     }
+  }
+
+  .pagination-list {
+    @apply flex space-x-1 font-semibold text-sm text-gray-500;
   }
 }

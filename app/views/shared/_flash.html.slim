@@ -1,0 +1,5 @@
+#flash class="z-[1001] fixed top-5 right-5"
+  - flash.each do |type, message|
+    = render FlashComponent.new(type:, message:)
+
+  - flash.clear
