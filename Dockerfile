@@ -32,7 +32,7 @@ RUN apt-get update -qq && \
 
 # Install JavaScript dependencies
 # Keep NODE_VERSION matching .node-version / .nvmrc
-ARG NODE_VERSION=23.5.0
+ARG NODE_VERSION=26.13.0
 ARG YARN_VERSION=1.22.22
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
