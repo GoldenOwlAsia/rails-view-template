@@ -1,0 +1,10 @@
+aside id="sidebar" class="fixed bg-white border-r border-gray-200 top-0 left-0 z-[20] w-64 h-screen pt-[3.6rem] transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar"
+  div class="h-full px-3 py-4 overflow-y-auto bg-white"
+    ul class="space-y-2 font-medium"
+      - admin_menu_items.each do |item|
+        - active_class = current_page?(item[:path]) ? 'text-primary bg-gray-100 hover:bg-gray-200 group-hover:text-primary' : ''
+
+        li
+          = link_to item[:path], class: "#{active_class} flex items-center p-2 rounded-lg group"
+            = lucide_icon(item[:icon], class: 'size-6')
+            span class="ms-3" = item[:label]

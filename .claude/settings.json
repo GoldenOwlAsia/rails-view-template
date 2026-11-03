@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(rg *)",
+      "Bash(bin/rspec *)",
+      "Bash(bundle exec rspec *)",
+      "Bash(bin/rubocop *)",
+      "Bash(bundle exec rubocop *)",
+      "Bash(bundle exec slim-lint *)",
+      "Bash(bundle exec database_consistency *)",
+      "Bash(bundle exec brakeman *)",
+      "Bash(bin/rails zeitwerk:check)",
+      "Bash(bin/rails routes *)",
+      "Bash(yarn lint *)"
+    ],
+    "ask": [
+      "Bash(bundle add *)",
+      "Bash(bundle update *)",
+      "Bash(yarn add *)",
+      "Bash(bin/rails db:migrate *)",
+      "Bash(bin/rails generate *)"
+    ],
+    "deny": [
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -f*)",
+      "Bash(bin/rails db:drop*)",
+      "Bash(bin/rails db:reset*)",
+      "Bash(bundle exec rails db:drop*)",
+      "Bash(bundle exec rails db:reset*)",
+      "Bash(rails db:drop*)",
+      "Bash(rails db:reset*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-files.sh",
+            "timeout": 10,
+            "statusMessage": "Checking for protected files"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/guard-bash.sh",
+            "timeout": 10,
+            "statusMessage": "Checking command safety"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/verify-changes.sh",
+            "timeout": 300,
+            "statusMessage": "Linting changed files"
+          }
+        ]
+      }
+    ]
+  }
+}

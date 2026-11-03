@@ -1,24 +1,26 @@
+# i18n-tasks finds missing and unused translations: https://github.com/glebm/i18n-tasks
 base_locale: en
-locales: [en]
 
 data:
   read:
     - config/locales/%{locale}.yml
-    - config/locales/**/*.%{locale}.yml
+    - config/locales/devise.%{locale}.yml
+    - config/locales/simple_form.%{locale}.yml
   write:
     - config/locales/%{locale}.yml
-    - config/locales/**/*.%{locale}.yml
 
 search:
   paths:
-    - app
-    - lib
-    - config/routes.rb
+    - app/
+  exclude:
+    - app/frontend/**/*
+    - app/assets/**/*
 
-  include:
-    - '*.rb'
-    - '*.erb'
-    - '*.slim'
-translation:
-  backend: google
-  google_translate_api_key: ENV['GOOGLE_TRANSLATE_API_KEY']
+ignore_unused:
+  - 'devise.*'
+  - 'simple_form.*'
+  - 'activerecord.*'
+  - 'errors.messages.*'
+  # Reserved for Crudable's flash messages once it's wired through I18n
+  # instead of the hardcoded strings it uses today — not referenced yet.
+  - 'common.*'

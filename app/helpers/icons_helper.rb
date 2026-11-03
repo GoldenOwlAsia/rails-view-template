@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module IconsHelper
   def lucide_icon(name, options = {})
     tag.i('', data: { lucide: name }, class: options[:class].to_s, **options.except(:class))

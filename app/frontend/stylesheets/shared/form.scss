@@ -1,0 +1,35 @@
+@layer components {
+  .form {
+    @apply max-w-md md:space-y-6 xl:max-w-xl w-full mx-auto;
+  }
+
+  .form-wrapper {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .form-label {
+    @apply block text-xs font-medium text-black;
+  }
+
+  .form-control {
+    box-shadow: none;
+    @apply ring-0 outline-none;
+    @apply rounded-md border-transparent p-[10px] shadow-none text-xs font-medium text-black bg-white w-full;
+  }
+
+  .form-control:focus {
+    @apply border-primary ring-0 outline-none border !text-black;
+  }
+
+  .form-control::placeholder {
+    color: #727192;
+  }
+
+  .form-submit {
+    @apply w-full bg-[#393AF7] text-xs text-white py-[11px] px-4 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 shadow-lg;
+  }
+
+  .invalid-feedback {
+    @apply mt-2 text-red-500 text-xs italic;
+  }
+}

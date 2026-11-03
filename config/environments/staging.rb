@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
@@ -60,8 +58,11 @@ Rails.application.configure do
   # want to log everything, set the level to "debug".
   config.log_level = ENV.fetch('RAILS_LOG_LEVEL', 'info')
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  # Replace the default in-process memory cache store with a durable alternative.
+  config.cache_store = :memory_store
+
+  # Replace the default in-process and non-durable queuing backend for Active Job.
+  config.active_job.queue_adapter = :sidekiq
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -74,7 +75,18 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Store files locally.
-  config.active_storage.service = :amazon
+  config.active_storage.service = :local
+
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
+  # Enable web console on staging only; production never sets this. The
+  # permission list is deliberately not 0.0.0.0/0: web_console hands out a REPL
+  # running inside the app process to anyone who can reach an error page, and
+  # staging usually carries production-shaped data. Default to private ranges
+  # and let deploys widen it explicitly.
+  config.web_console.development_only = false
+  config.web_console.permissions = ENV.fetch('WEB_CONSOLE_CIDR', '10.0.0.0/8')
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
@@ -83,4 +95,16 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Set host to be used by links generated in mailer templates.
+  config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV['SMTP_HOST'],
+    port: ENV['SMTP_PORT'],
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
 end

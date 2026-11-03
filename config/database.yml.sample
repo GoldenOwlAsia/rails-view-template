@@ -1,24 +1,29 @@
+# ENV.fetch only falls back when the key is absent. A key present but empty —
+# which is exactly what copying .env.sample gives you — returns "", so every
+# value here uses .presence to treat empty the same as unset.
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  <% if ENV["DB_HOST"] %>
-  host: <%= ENV["DB_HOST"] %>
-  username: postgres
-  password: postgres
-  <% end %>
-
+  pool: <%= ENV["RAILS_MAX_THREADS"].presence || 5 %>
+  host: <%= ENV["DB_HOST"].presence || "localhost" %>
+  port: <%= ENV["DB_PORT"].presence || 5432 %>
+  username: <%= ENV["DB_USERNAME"].presence %>
+  password: <%= ENV["DB_PASSWORD"].presence %>
 
 development:
   <<: *default
-  database: rails_boilerplate_development
+  database: <%= ENV["DB_NAME"].presence || "rails_boilerplate_development" %>
 
+# The test database is never taken from DB_NAME: it is wiped on every run, so
+# pointing it at the development database by accident has to be impossible.
 test:
   <<: *default
   database: rails_boilerplate_test
 
+staging:
+  <<: *default
+  database: <%= ENV["DB_NAME"].presence || "rails_boilerplate_staging" %>
+
 production:
   <<: *default
-  database: rails_boilerplate_production
-  username: rails_boilerplate
-  password: <%= ENV["RAILS_BOILERPLATE_DATABASE_PASSWORD"] %>
+  database: <%= ENV["DB_NAME"].presence || "rails_boilerplate_production" %>
