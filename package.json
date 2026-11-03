@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "23.5.0"
+    "node": "26.13.0"
   },
   "scripts": {
     "start": "concurrently -i -k --kill-others-on-fail -p none 'RUBY_DEBUG_OPEN=true bin/rails s' 'bin/vite dev'",
@@ -49,6 +49,6 @@
     "stylelint": "^16.26.1",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
-    "vite-plugin-ruby": "^5.1.1"
+    "vite-plugin-ruby": "^5.2.6"
   }
 }
